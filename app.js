@@ -20,8 +20,9 @@ recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
 //para registrar/grabar la voz
+let micImgContainer = document.getElementById('micImgContainer');
 let micImg = document.getElementById('micImg');
-recognition.start();
+// recognition.start();
 micImg.className = 'micRecording';
 
 function rec(){
@@ -32,14 +33,13 @@ function stop(){
     recognition.stop();
     micImg.className = 'micOff';
 }
-micImg.addEventListener('click', ()=>{
-    console.log(micImg.className);
+micImgContainer.addEventListener('mousedown', ()=>{
     if(micImg.className == 'micRecording'){
         stop();
     }
-    if(micImg.className == 'micOff'){
+    else if(micImg.className == 'micOff'){
         rec(); 
-    }
+    };
 });
 //micImg muy pequeña? porque con otras cosas, el eventlisterner funciona bien... :((
 

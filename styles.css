@@ -12,14 +12,23 @@ body{
 .all-container{
     position: relative;
 }
-.micOff{
+#micImgContainer{
     position: absolute;
-    padding: .1em;
+    background-color: rgba(0, 0, 0, .8);
+    border-radius: 50%;
+    margin: 4px;
+    padding: 6px;
+    z-index: 6;
+    cursor: pointer;
+}
+#micImgContainer:active{
+    background-color: rgb(75, 75, 75);
+    transform: scale(.95);
+}
+.micOff{
     filter: invert(41%) sepia(3%) saturate(19%) hue-rotate(337deg) brightness(93%) contrast(85%);
 }
 .micRecording{
-    position: absolute;
-    padding: .1em;
     filter: invert(17%) sepia(94%) saturate(7269%) hue-rotate(3deg) brightness(95%) contrast(124%);
 }
 #road-loop{
@@ -115,9 +124,13 @@ body{
 }
 .btnsContainer > button:active{
     background-color: rgb(138, 180, 134);
+    transform: scale(.95);
 }
 .scoreboard-container__scoreboard{
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
     z-index: 6;
     width: auto;
     height: auto;
@@ -125,7 +138,7 @@ body{
     font-size: 2em;
     font-family: 'Bangers', cursive, Helvetica, Arial;
     letter-spacing: 1.5px;
-    padding: .5em;
+    padding: .2em;
 }
 .scoreboard-container__black-bg{
     z-index: 5;
@@ -136,8 +149,38 @@ body{
     background-color: black;
 }
 @media (max-width: 500px){
+    #micImgContainer{
+        padding: 3px;
+    }
+    .btnsContainer > button{
+        width: 40px;
+        height: 40px;
+    }
+    #leftBTN::after{
+        font-size: 1.5em;
+    }
+    #rightBTN::after{
+        font-size: 1.5em;
+    }
+    #downBTN::after{
+        font-size: 1.5em;
+    }
     .scoreboard-container__scoreboard{
         font-size: 1em;
+    }
+}
+@media (max-width: 280px){
+    #micImgContainer{
+        padding: 2px;
+    }
+    #leftBTN{
+        margin-top: 20px;
+    }
+    #rightBTN{
+        margin-top: 20px;
+    }
+    #downBTN{
+        margin-top: -20px;
     }
 }
 @media (min-width: 1000px){
@@ -158,117 +201,9 @@ body{
         transform: translate(-50%, 0);
         width: 50%;
     }
-    .all-container{
-        position: relative;
-    }
-    #road-loop{
-        width: 100%;
-        height: auto;
-    }
-    .personDown-rigth{
-        z-index: 4;
-        position: absolute;
-        width: 43%;
-        /* top: 55%; */
-        left: 41%;
-    }
-    .personDown-left{
-        z-index: 4;
-        position: absolute;
-        width: 43%;
-        /* top: 55%; */
-        left: 12.5%;
-    }
-    /* .personDown{
-        top: 75%;
-    }
-    .personUp{
-        top: 56%;
-    } */
-    .tooltip{
-        background-color: rgba(164, 164, 164, 0.7);
-        border-radius: 10px;
-        position: absolute;
-        top: 1%;
-        left: 50%;
-        transform: translate(-50%, 0%);
-        color: rgb(0, 0, 0);
-        font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
-        font-weight: 500;
-        z-index: 6;
-        text-align: center;
-        padding: 2px;
-        font-size: 1em;
-        width: auto;
-        height: auto;
-        max-width: 30%;
-        max-height: 20%;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-    }
-    #car{
-        position: absolute;
-        width: 13%;
-        top: 70%;
-        left: 35%;
-        filter: drop-shadow(0px 3px 3px black);
-    }
-    .scoreboard-container{
-        position: relative;
-        height: 100vh;
-    }
-    .scoreboard-container__scoreboard{
-        position: relative;
-        z-index: 6;
-        width: auto;
-        height: auto;
-        color: #fff;
-        font-size: 1em;
-        font-family: 'Bangers', cursive, Helvetica, Arial;
-        letter-spacing: 1.5px;
-        padding: .1em;
-    }
-    .btnsContainer{
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
     .btnsContainer > button{
-        z-index: 6;
         width: 30px;
         height: 30px;
-        background-color: white;
-        border-radius: 50%;
-        border: 0;
         margin: 0px;
-    }
-    #leftBTN::after{
-        content: '↼';
-        font-size: 2em;
-        color:rgb(0, 0, 0);
-    }
-    #rightBTN::after{
-        content: '⇁';
-        font-size: 2em;
-        color:rgb(0, 0, 0);
-    }
-    #downBTN::after{
-        content: '⇃';
-        font-size: 2em;
-        color:rgb(0, 0, 0);
-    }
-    .btnsContainer > button:active{
-        background-color: rgb(138, 180, 134);
-    }
-    .scoreboard-container__black-bg{
-        z-index: 5;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black;
     }
 }
