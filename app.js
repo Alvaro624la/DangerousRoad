@@ -20,7 +20,30 @@ recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
 //para registrar/grabar la voz
+let micImg = document.getElementById('micImg');
 recognition.start();
+micImg.className = 'micRecording';
+
+function rec(){
+    recognition.start();
+    micImg.className = 'micRecording';
+};
+function stop(){
+    recognition.stop();
+    micImg.className = 'micOff';
+}
+micImg.addEventListener('click', ()=>{
+    console.log(micImg.className);
+    if(micImg.className == 'micRecording'){
+        stop();
+    }
+    if(micImg.className == 'micOff'){
+        rec(); 
+    }
+});
+//micImg muy pequeña? porque con otras cosas, el eventlisterner funciona bien... :((
+
+
 
 //manejar errores al no reconocer la voz
 recognition.onerror = function(event) {
@@ -31,6 +54,9 @@ recognition.onerror = function(event) {
 //////// EMPEZAMOS A MANEJAR EL RECONOCIMIENTO DE VOZ RESULTANTE ////////
 let upContainer = document.getElementById('all-container');
 let person = document.getElementById('person');
+let btnLeft = document.getElementById('leftBTN');
+let btnRight = document.getElementById('rightBTN');
+let btnDown = document.getElementById('downBTN');
 let scoreboard = document.getElementById('scoreboard');
 let points = 0;
 scoreboard.innerHTML = `Score: ${points}`;
@@ -103,11 +129,10 @@ recognition.onresult = (e)=>{
     }, 1000);
 };
 
-
 //eliminar comportamiento click raton en la pagina
 document.onmousedown = ()=>{return false};
 
-//mover persona al presionar flechas
+//mover persona al presionar flechas KEYBOARD
 window.addEventListener('keydown', keyDown);
 function keyDown(e){
     e.preventDefault();
@@ -133,8 +158,15 @@ function keyUp(e){
             break;
     };
 };
+//mover persona al presionar flechas RATON/BTNs pantalla
+btnLeft.addEventListener('mousedown', ()=>{person.className = 'personDown-left';});
+btnRight.addEventListener('mousedown', ()=>{person.className = 'personDown-rigth';});
+btnDown.addEventListener('mousedown', ()=>{abajo();setTimeout(arriba, 1000);});
+
+
 //COMPROBAR si cambio el valor del objeto PERSONA
 // window.setInterval(()=>console.log(PERSONA.posicion), 120);
+
 
 
 

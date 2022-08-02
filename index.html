@@ -25,8 +25,9 @@
     <nav>
     </nav>
     <main id="main" class="main">
-        <article class="">
+        <article class="article">
             <section id="all-container" class="all-container">
+                <img id="micImg" class="micOff" src="./src/mic.png" alt="mic-info-icon">
                 <video id="road-loop" class="" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" autoplay loop muted></video>
                 <img id="person" class="personDown-rigth" src="src/person.png" alt="person-walking-img">
                 <img id="car" src="./src/car1.png">
@@ -34,6 +35,13 @@
             </section>
             <section class="scoreboard-container">
                 <p id="scoreboard" class="scoreboard-container__scoreboard"></p>
+                <div id="btnsContainer" class="btnsContainer">
+                    <button type="button" id="leftBTN"></button>
+                    <button type="button" id="rightBTN"></button>
+                </div>
+                <div id="btnsContainer" class="btnsContainer">
+                    <button type="button" id="downBTN"></button>
+                </div>                  
                 <section class="scoreboard-container__black-bg"></section>
             </section>
             
