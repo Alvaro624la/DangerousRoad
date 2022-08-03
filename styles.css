@@ -6,7 +6,7 @@
 body{
     background-color: #000;
     /*evitar overflow y scroll con el bg black que esconde la persona con 100vh de height*/
-    /* overflow: hidden; */
+    overflow: hidden;
     scroll-behavior: smooth;
 }
 .all-container{
@@ -18,7 +18,7 @@ body{
     border-radius: 50%;
     margin: 4px;
     padding: 6px;
-    z-index: 6;
+    z-index: 1999999996;
     cursor: pointer;
 }
 #micImgContainer:active{
@@ -35,19 +35,42 @@ body{
     width: 100%;
     height: auto;
 }
-.personDown-rigth{
-    z-index: 4;
+.person-right{
+    z-index: 1999999994;
     position: absolute;
     width: 43%;
     /* top: 55%; */
-    left: 41%;
+    left: 43.5%;
 }
-.personDown-left{
-    z-index: 4;
+.person-left{
+    z-index: 1999999994;
     position: absolute;
     width: 43%;
     /* top: 55%; */
-    left: 12.5%;
+    left: 10%;
+}
+.person-dying-left{
+    /* top: 100%; */
+    transform: 
+        translateY(12px)
+        rotate(90deg) 
+        /* translate(80em, -100em) */
+        /* rotate(300deg) */
+        /* scale(4) */
+    ;
+    transition: transform cubic-bezier(.63,-0.39,.69,.71) 1s;
+    /* transition: transform linear 1.3s; */
+}
+.person-dying-right{
+    /* top: 100%; */
+    transform: 
+        translateY(12px)
+        rotate(-90deg) 
+        /* translate(80em, -100em) */
+        /* rotate(300deg) */
+        /* scale(4) */
+    ;
+    transition: transform cubic-bezier(.63,-0.39,.69,.71) 1s;
 }
 /* .personDown{
     top: 75%;
@@ -65,7 +88,7 @@ body{
     color: rgb(0, 0, 0);
     font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
     font-weight: 500;
-    z-index: 6;
+    z-index: 1999999996;
     text-align: center;
     padding: 2px;
     font-size: 1em;
@@ -77,12 +100,58 @@ body{
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-#car{
+/* #car{
     position: absolute;
-    width: 13%;
-    top: 70%;
-    left: 35%;
-    filter: drop-shadow(0px 3px 3px black);
+    z-index: 1999999993;
+
+    animation-name: car-animation;
+    animation-duration: 3s;
+    animation-timing-function: 
+    ease-in;
+    animation-iteration-count: infinite;
+} */
+@keyframes car-left-animation {
+    0% {
+        width: 0%;
+        top: 81%;
+        left: 44%;
+    }
+    60% {
+        width: 10%;
+        top: 69%;
+        left: 37%;
+        /* filter: drop-shadow(0px 3px 3px black); */
+    }
+    79%{
+        /* filter: drop-shadow(0px 3px 3px black); */
+    }
+    100%{
+        width: 170%;
+        top: 100%;
+        left: -140%;
+    }
+}
+@keyframes car-right-animation {
+    0% {
+        width: 0%;
+        top: 81%;
+        right: 46%;
+    }
+    60% {
+        width: 10%;
+        top: 69%;
+        right: 39%;
+        /* filter: drop-shadow(0px 3px 3px black); */
+        
+    }
+    79%{
+        /* filter: drop-shadow(0px 3px 3px black); */
+    }
+    100%{
+        width: 170%;
+        top: 100%;
+        right: -142%;
+    }
 }
 .scoreboard-container{
     position: relative;
@@ -96,7 +165,7 @@ body{
     justify-content: space-around;
 }
 .btnsContainer > button{
-    z-index: 6;
+    z-index: 1999999996;
     width: 50px;
     height: 50px;
     background-color: white;
@@ -131,7 +200,7 @@ body{
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 6;
+    z-index: 1999999996;
     width: auto;
     height: auto;
     color: #fff;
@@ -141,7 +210,7 @@ body{
     padding: .2em;
 }
 .scoreboard-container__black-bg{
-    z-index: 5;
+    z-index: 1999999995;
     position: absolute;
     top: 0;
     width: 100%;

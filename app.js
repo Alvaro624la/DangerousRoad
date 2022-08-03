@@ -1,9 +1,3 @@
-// const PERSONA = {
-    // posicion: 'arriba',
-    // estado: 'viva'
-// };//ésto es util?
-
-
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
@@ -23,7 +17,7 @@ recognition.maxAlternatives = 1;
 let micImgContainer = document.getElementById('micImgContainer');
 let micImg = document.getElementById('micImg');
 // recognition.start();
-micImg.className = 'micRecording';
+micImg.className = 'micOff';
 
 function rec(){
     recognition.start();
@@ -41,8 +35,6 @@ micImgContainer.addEventListener('mousedown', ()=>{
         rec(); 
     };
 });
-//micImg muy pequeña? porque con otras cosas, el eventlisterner funciona bien... :((
-
 
 
 //manejar errores al no reconocer la voz
@@ -53,6 +45,7 @@ recognition.onerror = function(event) {
 
 //////// EMPEZAMOS A MANEJAR EL RECONOCIMIENTO DE VOZ RESULTANTE ////////
 let upContainer = document.getElementById('all-container');
+let videoLoop = document.getElementById('road-loop');
 let person = document.getElementById('person');
 let btnLeft = document.getElementById('leftBTN');
 let btnRight = document.getElementById('rightBTN');
@@ -61,13 +54,129 @@ let scoreboard = document.getElementById('scoreboard');
 let points = 0;
 scoreboard.innerHTML = `Score: ${points}`;
 
+/////////////////////CAR/////////////
+let zIndexNum = 1999999993;
+let carVelocitySec = 3;
+let carVelocityMSec = carVelocitySec*1000;
+//el 80% del carVelocitySec en MILISEGUNDOS//
+let carVelMSecpercentage = (80*carVelocitySec)*10;
+//el 79% del carVelocitySec en MILISEGUNDOS//
+let crashMSecpercentage = (79*carVelocitySec)*10;
+
+function carLeftAppears(){
+    let car = document.createElement("img");
+    car.src = './src/car1.png';
+    upContainer.appendChild(car);
+    ///car CSS///
+    car.style.position = 'absolute';
+    car.style.zIndex = zIndexNum;
+    //Para no superponer nuevos coches y que se vean uno encima de otro (podré sacar 1.999.999.993 coches).
+    zIndexNum--;
+    car.style.animation = `car-left-animation ${carVelocitySec}s ease-in 1`;
+
+    //cuando la persona está en el mismo carril del coche a su 79% del recorrido --> DEAD
+    window.setTimeout(()=>{
+        if(person.className == 'person-left'){
+            //GAME OVER
+            person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
+            car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
+            person.classList.add('person-dying-left');
+            car.parentElement.removeChild(car);
+            videoLoop.removeAttribute('loop');
+            videoLoop.removeAttribute('autoplay');
+            // parar todo
+            btnDown.removeEventListener('mouseup', ()=>arriba());
+            btnDown.removeEventListener('mousedown', ()=>abajo());
+            btnRight.removeEventListener('mousedown', ()=>person.className = 'person-right');
+            btnLeft.removeEventListener('mousedown', ()=>person.className = 'person-left');
+            window.removeEventListener('keyup', keyUp);
+            window.removeEventListener('keydown', keyDown);
+            micImgContainer.addEventListener('mousedown', ()=>{
+                if(micImg.className == 'micRecording'){
+                    stop();
+                }
+                else if(micImg.className == 'micOff'){
+                    rec(); 
+                };
+            });
+            // mostrar resultado
+        };
+    }, crashMSecpercentage);
+
+    //cuando los coches pasen el 80% del recorrido:
+    window.setTimeout(()=>{
+        //cambiar color coche a verde
+        car.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
+        //cambiar z-index para pasar el coche sobre la persona
+        car.style.zIndex = 1999999995;
+        winPoint();
+    }, carVelMSecpercentage);
+    //eliminar nodo de coche
+    window.setTimeout(()=>{
+        //este try catch es provisional hasta que vea como solucionar el --> cuando GAME OVER, eliminar todo lo de despues, incluida ésta función.
+        try{
+            car.parentElement.removeChild(car);
+        }
+        catch (err) {console.log(err)};
+    }, carVelocityMSec);
+};
+function carRightAppears(){
+    let car = document.createElement("img");
+    car.src = './src/car1.png';
+    upContainer.appendChild(car);
+    ///car CSS///
+    car.style.position = 'absolute';
+    car.style.zIndex = zIndexNum;
+    zIndexNum--;
+    car.style.animation = `car-right-animation ${carVelocitySec}s ease-in 1`;
+
+    window.setTimeout(()=>{
+        if(person.className == 'person-right'){
+            //GAME OVER
+            person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
+            car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
+            person.classList.add('person-dying-left');
+            car.parentElement.removeChild(car);
+            videoLoop.removeAttribute('loop');
+            videoLoop.removeAttribute('autoplay');
+            // parar todo
+            btnDown.removeEventListener('mouseup', ()=>arriba());
+            btnDown.removeEventListener('mousedown', ()=>abajo());
+            btnRight.removeEventListener('mousedown', ()=>person.className = 'person-right');
+            btnLeft.removeEventListener('mousedown', ()=>person.className = 'person-left');
+            window.removeEventListener('keyup', keyUp);
+            window.removeEventListener('keydown', keyDown);
+            micImgContainer.addEventListener('mousedown', ()=>{
+                if(micImg.className == 'micRecording'){
+                    stop();
+                }
+                else if(micImg.className == 'micOff'){
+                    rec(); 
+                };
+            });
+            // mostrar resultado
+        };
+    }, crashMSecpercentage);
+
+    window.setTimeout(()=>{
+        car.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
+        car.style.zIndex = 1999999995;
+        winPoint();
+    }, carVelMSecpercentage);
+    window.setTimeout(()=>{
+        try{
+            car.parentElement.removeChild(car);
+        }
+        catch (err) {console.log(err)};
+    }, carVelocityMSec);
+};
+
 ///// OTRAS FUNCIONES /////
 //ANDAR
 let topNumero = 55;
 //colocar persona al cargar página
 person.style.top = `${topNumero}%`;
 function walk(){
-    // person.classList.toggle('personUp');
     //arriba
     if(topNumero == 55){
         topNumero = 56;
@@ -79,7 +188,7 @@ function walk(){
     else{topNumero}
     person.style.top = `${topNumero}%`;
 };
-let walkInterval = window.setInterval(walk, 200);
+let walkInterval = window.setInterval(walk, 160);
 
 function abajo(){
     // PERSONA.posicion = 'abajo';//ésto es util? para hacer recuento de movimientos, tal vez?
@@ -97,7 +206,6 @@ function winPoint(){
     points++;
     scoreboard.innerHTML = `Score: ${points}`;
 };
-//falta asignar funcion cuando objeto sobrepase a persona/pantalla/algo parecido
 
 //trabajar con el resultado obtenido
 let i = 0;
@@ -108,10 +216,10 @@ recognition.onresult = (e)=>{
     i++;
     console.log(resultado);
     if(resultado.includes('derecha') || resultado.includes('derecho')){
-        person.className = 'personDown-rigth';
+        person.className = 'person-right';
     };
     if(resultado.includes('izquierda') || resultado.includes('izquierdo')){
-        person.className = 'personDown-left';
+        person.className = 'person-left';
     };
     if(resultado.includes('abajo') || resultado.includes('agáchate')){
         //setInterval para agacharse 1 segundo y volver arriba
@@ -138,10 +246,12 @@ function keyDown(e){
     e.preventDefault();
     switch(e.key){
         case 'ArrowRight':
-            person.className = 'personDown-rigth';
+            person.className = 'person-right';
+            carLeftAppears();
             break;
         case 'ArrowLeft':
-            person.className = 'personDown-left';
+            person.className = 'person-left';
+            carRightAppears();
             break;
         case 'ArrowDown':
             abajo();
@@ -159,28 +269,25 @@ function keyUp(e){
     };
 };
 //mover persona al presionar flechas RATON/BTNs pantalla
-btnLeft.addEventListener('mousedown', ()=>{person.className = 'personDown-left';});
-btnRight.addEventListener('mousedown', ()=>{person.className = 'personDown-rigth';});
-btnDown.addEventListener('mousedown', ()=>{abajo();setTimeout(arriba, 1000);});
-
-
-//COMPROBAR si cambio el valor del objeto PERSONA
-// window.setInterval(()=>console.log(PERSONA.posicion), 120);
-
+btnLeft.addEventListener('mousedown', ()=>person.className = 'person-left');
+btnRight.addEventListener('mousedown', ()=>person.className = 'person-right');
+// btnDown.addEventListener('mousedown', ()=>{abajo();setTimeout(arriba, 1000);});
+btnDown.addEventListener('mousedown', ()=>abajo());
+btnDown.addEventListener('mouseup', ()=>arriba());
 
 
 
-//¿ÉSTO ES ÚTIL?
-//cuando no reconoce ningun parecido al elemento del array que queremos hacer match
-// recognition.onnomatch = function(event) {
-//     console.log('Disculpa, no te he entendido.');
-// }
 
 
-//https://www.youtube.com/user/ssuperguz
+
+
+
+///PENDIENTE///
+//Aparicion de coches aleatoriamente, sin llegar a aparecer simultaneamente.
+
 //mandarle link al artista del fondo loop
+//https://www.youtube.com/user/ssuperguz
 
 
-
-//faltan:
-//botones para movil mover persona
+///CONCLUSION o APRENDER MÁS///
+//Crear un objeto PERSONA.estado == 'viva' y cambiarlo a 'muerta' cuando GAME OVER, no funciona de nada (si que cambia el valor de esa parte del objeto, pero no parece que pueda hacer nada. También probé con una variable global en lugar de objeto, llamada personaEstado, pero nada). Finalmente tuve que usar removeEventListener manualmente en todos los eventos creados.
