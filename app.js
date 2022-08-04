@@ -135,7 +135,7 @@ function carRightAppears(){
             //GAME OVER
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
             car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            person.classList.add('person-dying-left');
+            person.classList.add('person-dying-right');
             car.parentElement.removeChild(car);
             videoLoop.removeAttribute('loop');
             videoLoop.removeAttribute('autoplay');
