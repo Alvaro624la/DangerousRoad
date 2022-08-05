@@ -56,12 +56,12 @@ scoreboard.innerHTML = `Score: ${points}`;
 
 /////////////////////CAR/////////////
 let zIndexNum = 1999999993;
-let carVelocitySec = 3;
+let carVelocitySec = 2;
 let carVelocityMSec = carVelocitySec*1000;
 //el 80% del carVelocitySec en MILISEGUNDOS//
-let carVelMSecpercentage = (80*carVelocitySec)*10;
+let carVelMSecpercentage = (80*carVelocityMSec)/100;
 //el 79% del carVelocitySec en MILISEGUNDOS//
-let crashMSecpercentage = (79*carVelocitySec)*10;
+let crashMSecpercentage = (79*carVelocityMSec)/100;
 
 function carLeftAppears(){
     let car = document.createElement("img");
@@ -99,6 +99,7 @@ function carLeftAppears(){
                     rec(); 
                 };
             });
+            clearInterval(randomAppearsInterval);
             // mostrar resultado
         };
     }, crashMSecpercentage);
@@ -154,23 +155,31 @@ function carRightAppears(){
                     rec(); 
                 };
             });
+            clearInterval(randomAppearsInterval);
             // mostrar resultado
         };
     }, crashMSecpercentage);
-
-    window.setTimeout(()=>{
-        car.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
-        car.style.zIndex = 1999999995;
-        winPoint();
-    }, carVelMSecpercentage);
-    window.setTimeout(()=>{
-        try{
-            car.parentElement.removeChild(car);
-        }
-        catch (err) {console.log(err)};
-    }, carVelocityMSec);
+        window.setTimeout(()=>{
+            car.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
+            car.style.zIndex = 1999999995;
+            winPoint();
+        }, carVelMSecpercentage);
+        window.setTimeout(()=>{
+            try{
+                car.parentElement.removeChild(car);
+            }
+            catch (err) {console.log(err)};
+        }, carVelocityMSec);
 };
-
+///CARS APPEARS
+function randomAppears(){
+    //numero random del 0 al 9
+    let randomNum = Math.random()*10;
+    if(randomNum < 4.5){carLeftAppears()}
+    if(randomNum > 4.5){carRightAppears()}
+    console.warn(`Clue: Car L/R appears --> ${randomNum.toFixed(1)}`);
+}
+let randomAppearsInterval = window.setInterval(randomAppears, carVelocityMSec);
 ///// OTRAS FUNCIONES /////
 //ANDAR
 let topNumero = 55;
@@ -205,6 +214,10 @@ function arriba(){
 function winPoint(){
     points++;
     scoreboard.innerHTML = `Score: ${points}`;
+    //cada vez que se gane un punto, restar numero de velocidad de aparicion de los coches. Un 1%;
+    // carVelocitySec = carVelocitySec - (1*carVelocitySec)/100;
+    // console.log(`carVelocitySec = ${carVelocitySec.toFixed(3)};`);
+    //PROBLEMA CON ASINCRONIA DEL INTERVALO PARA CAMBIAR VARIABLE Y QUE AFECTE
 };
 
 //trabajar con el resultado obtenido
@@ -247,11 +260,9 @@ function keyDown(e){
     switch(e.key){
         case 'ArrowRight':
             person.className = 'person-right';
-            carLeftAppears();
             break;
         case 'ArrowLeft':
             person.className = 'person-left';
-            carRightAppears();
             break;
         case 'ArrowDown':
             abajo();

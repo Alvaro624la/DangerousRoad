@@ -240,6 +240,21 @@ body{
         font-size: 1em;
     }
 }
+/*para horizontal*/
+@media (max-width: 400px){
+    #micImgContainer{
+        padding: 2px;
+    }
+    #leftBTN{
+        margin-top: 20px;
+    }
+    #rightBTN{
+        margin-top: 20px;
+    }
+    #downBTN{
+        margin-top: -20px;
+    }
+}
 @media (max-width: 280px){
     #micImgContainer{
         padding: 2px;
@@ -277,6 +292,9 @@ body{
         left: 50%;
         transform: translate(-50%, 0);
         width: 50%;
+    }
+    .scoreboard-container__scoreboard{
+        font-size: 1em;
     }
     .btnsContainer > button{
         width: 30px;
