@@ -43,6 +43,64 @@ recognition.onerror = function(event) {
     // recognition.start();
 };
 
+////AUDIOS////
+//win points//
+const audioPoint = document.createElement('audio');
+audioPoint.preload = 'auto';
+audioPoint.volume = 0.8;
+audioPoint.src = './src/win-point.mp3';
+document.body.appendChild(audioPoint);
+//start//
+const audioStart = document.createElement('audio');
+audioStart.preload = 'auto';
+audioStart.volume = 0.6;
+audioStart.src = './src/start.mp3';
+document.body.appendChild(audioStart);
+//person-l-r//
+const audioPersonLR = document.createElement('audio');
+audioPersonLR.preload = 'auto';
+audioPersonLR.volume = 0.6;
+audioPersonLR.src = './src/person-l-r-short.mp3';
+document.body.appendChild(audioPersonLR);
+//person-d//
+const audioPersonD = document.createElement('audio');
+audioPersonD.preload = 'auto';
+audioPersonD.volume = 0.8;
+audioPersonD.src = './src/person-d.mp3';
+document.body.appendChild(audioPersonD);
+//game-over//
+const audioGameOver = document.createElement('audio');
+audioGameOver.preload = 'auto';
+audioGameOver.volume = 1;
+audioGameOver.src = './src/game-over-epic.mp3';
+document.body.appendChild(audioGameOver);
+//menu-select//
+const audioMenuSelect = document.createElement('audio');
+audioMenuSelect.preload = 'auto';
+audioMenuSelect.volume = 1;
+audioMenuSelect.src = './src/menu-select.mp3';
+document.body.appendChild(audioMenuSelect);
+//menu-in//
+const audioMenuIn = document.createElement('audio');
+audioMenuIn.preload = 'auto';
+audioMenuIn.volume = 1;
+audioMenuIn.src = './src/menu-in.mp3';
+document.body.appendChild(audioMenuIn);
+//menu-out//
+const audioMenuOut = document.createElement('audio');
+audioMenuOut.preload = 'auto';
+audioMenuOut.volume = 1;
+audioMenuOut.src = './src/menu-out.mp3';
+document.body.appendChild(audioMenuOut);
+//ambient//
+const audioAmbient = document.createElement('audio');
+audioAmbient.preload = 'auto';
+audioAmbient.volume = 0.1;
+audioAmbient.src = './src/ambient.mp3';
+document.body.appendChild(audioAmbient);
+
+audioStart.play();
+audioAmbient.play();
 //////// EMPEZAMOS A MANEJAR EL RECONOCIMIENTO DE VOZ RESULTANTE ////////
 let upContainer = document.getElementById('all-container');
 let videoLoop = document.getElementById('road-loop');
@@ -78,9 +136,11 @@ function carLeftAppears(){
     window.setTimeout(()=>{
         if(person.className == 'person-left'){
             //GAME OVER
+            person.classList.add('person-dying-left');
+
+            audioGameOver.play();
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
             car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            person.classList.add('person-dying-left');
             car.parentElement.removeChild(car);
             videoLoop.removeAttribute('loop');
             videoLoop.removeAttribute('autoplay');
@@ -101,13 +161,17 @@ function carLeftAppears(){
             });
             clearInterval(randomAppearsInterval);
             // mostrar resultado
+            points--;
+            scoreboard.innerHTML = `Score: ${points}`;
+            //mostrar pantalla final
             let gameOverModal = document.createElement('div');
             upContainer.appendChild(gameOverModal);
             gameOverModal.className = 'game-over-modal';
             let gameOverModalMessage = document.createElement('p');
             gameOverModal.appendChild(gameOverModalMessage);
             gameOverModalMessage.className = 'game-over-modal-message';
-            gameOverModalMessage.innerHTML = 'YOU  DIED';
+            // gameOverModalMessage.innerHTML = 'YOU  DIED';
+            gameOverModalMessage.innerHTML = 'GAME OVER';
             // btn restart
             let btnRestart = document.createElement('button');
             gameOverModal.appendChild(btnRestart);
@@ -115,7 +179,15 @@ function carLeftAppears(){
             window.setTimeout(()=>{
                 btnRestart.innerHTML = 'Restart game';
             }, 3000);
-            btnRestart.addEventListener('click', ()=>{window.location.reload(true)});
+            btnRestart.addEventListener('mouseover', ()=>{
+                audioMenuSelect.play();                            
+            });
+            btnRestart.addEventListener('click', ()=>{
+                audioMenuIn.play();
+                window.setTimeout(()=>{
+                    window.location.reload(true);  
+                }, 300);                             
+            });
         };
     }, crashMSecpercentage);
 
@@ -149,9 +221,11 @@ function carRightAppears(){
     window.setTimeout(()=>{
         if(person.className == 'person-right'){
             //GAME OVER
+            person.classList.add('person-dying-right');
+
+            audioGameOver.play();
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
             car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            person.classList.add('person-dying-right');
             car.parentElement.removeChild(car);
             videoLoop.removeAttribute('loop');
             videoLoop.removeAttribute('autoplay');
@@ -172,13 +246,16 @@ function carRightAppears(){
             });
             clearInterval(randomAppearsInterval);
             // mostrar resultado
+            points--;
+            scoreboard.innerHTML = `Score: ${points}`;
+            //mostrar pantalla final
             let gameOverModal = document.createElement('div');
             upContainer.appendChild(gameOverModal);
             gameOverModal.className = 'game-over-modal';
             let gameOverModalMessage = document.createElement('p');
             gameOverModal.appendChild(gameOverModalMessage);
             gameOverModalMessage.className = 'game-over-modal-message';
-            gameOverModalMessage.innerHTML = 'YOU  DIED';
+            gameOverModalMessage.innerHTML = 'GAME OVER';
             // btn restart
             let btnRestart = document.createElement('button');
             gameOverModal.appendChild(btnRestart);
@@ -186,7 +263,15 @@ function carRightAppears(){
             window.setTimeout(()=>{
                 btnRestart.innerHTML = 'Restart game';
             }, 3000);
-            btnRestart.addEventListener('click', ()=>{window.location.reload(true)});
+            btnRestart.addEventListener('mouseover', ()=>{
+                audioMenuSelect.play();                            
+            });
+            btnRestart.addEventListener('click', ()=>{
+                audioMenuIn.play();
+                window.setTimeout(()=>{
+                    window.location.reload(true);  
+                }, 300);                             
+            });
         };
     }, crashMSecpercentage);
         window.setTimeout(()=>{
@@ -233,6 +318,7 @@ function abajo(){
     // PERSONA.posicion = 'abajo';//ésto es util? para hacer recuento de movimientos, tal vez?
     topNumero = 75;
     person.style.top = `${topNumero}%`;
+    audioPersonD.play();
 };
 function arriba(){
     // PERSONA.posicion = 'arriba'; //ésto es util? para hacer recuento de movimientos, tal vez?
@@ -242,6 +328,7 @@ function arriba(){
 
 //sumar puntos
 function winPoint(){
+    audioPoint.play();
     points++;
     scoreboard.innerHTML = `Score: ${points}`;
     //cada vez que se gane un punto, restar numero de velocidad de aparicion de los coches. Un 1%;
@@ -259,9 +346,11 @@ recognition.onresult = (e)=>{
     i++;
     console.log(resultado);
     if(resultado.includes('derecha') || resultado.includes('derecho')){
+        audioPersonLR.play();
         person.className = 'person-right';
     };
     if(resultado.includes('izquierda') || resultado.includes('izquierdo')){
+        audioPersonLR.play();
         person.className = 'person-left';
     };
     if(resultado.includes('abajo') || resultado.includes('agáchate')){
@@ -289,9 +378,11 @@ function keyDown(e){
     e.preventDefault();
     switch(e.key){
         case 'ArrowRight':
+            audioPersonLR.play();
             person.className = 'person-right';
             break;
         case 'ArrowLeft':
+            audioPersonLR.play();
             person.className = 'person-left';
             break;
         case 'ArrowDown':
@@ -310,8 +401,14 @@ function keyUp(e){
     };
 };
 //mover persona al presionar flechas RATON/BTNs pantalla
-btnLeft.addEventListener('mousedown', ()=>person.className = 'person-left');
-btnRight.addEventListener('mousedown', ()=>person.className = 'person-right');
+btnLeft.addEventListener('mousedown', ()=>{
+    person.className = 'person-left';
+    audioPersonLR.play();
+});
+btnRight.addEventListener('mousedown', ()=>{
+    person.className = 'person-right';
+    audioPersonLR.play();
+});
 // btnDown.addEventListener('mousedown', ()=>{abajo();setTimeout(arriba, 1000);});
 btnDown.addEventListener('mousedown', ()=>abajo());
 btnDown.addEventListener('mouseup', ()=>arriba());
