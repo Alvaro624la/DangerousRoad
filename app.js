@@ -101,6 +101,21 @@ function carLeftAppears(){
             });
             clearInterval(randomAppearsInterval);
             // mostrar resultado
+            let gameOverModal = document.createElement('div');
+            upContainer.appendChild(gameOverModal);
+            gameOverModal.className = 'game-over-modal';
+            let gameOverModalMessage = document.createElement('p');
+            gameOverModal.appendChild(gameOverModalMessage);
+            gameOverModalMessage.className = 'game-over-modal-message';
+            gameOverModalMessage.innerHTML = 'YOU  DIED';
+            // btn restart
+            let btnRestart = document.createElement('button');
+            gameOverModal.appendChild(btnRestart);
+            btnRestart.className = 'btn-restart';
+            window.setTimeout(()=>{
+                btnRestart.innerHTML = 'Restart game';
+            }, 3000);
+            btnRestart.addEventListener('click', ()=>{window.location.reload(true)});
         };
     }, crashMSecpercentage);
 
@@ -157,6 +172,21 @@ function carRightAppears(){
             });
             clearInterval(randomAppearsInterval);
             // mostrar resultado
+            let gameOverModal = document.createElement('div');
+            upContainer.appendChild(gameOverModal);
+            gameOverModal.className = 'game-over-modal';
+            let gameOverModalMessage = document.createElement('p');
+            gameOverModal.appendChild(gameOverModalMessage);
+            gameOverModalMessage.className = 'game-over-modal-message';
+            gameOverModalMessage.innerHTML = 'YOU  DIED';
+            // btn restart
+            let btnRestart = document.createElement('button');
+            gameOverModal.appendChild(btnRestart);
+            btnRestart.className = 'btn-restart';
+            window.setTimeout(()=>{
+                btnRestart.innerHTML = 'Restart game';
+            }, 3000);
+            btnRestart.addEventListener('click', ()=>{window.location.reload(true)});
         };
     }, crashMSecpercentage);
         window.setTimeout(()=>{
@@ -285,11 +315,6 @@ btnRight.addEventListener('mousedown', ()=>person.className = 'person-right');
 // btnDown.addEventListener('mousedown', ()=>{abajo();setTimeout(arriba, 1000);});
 btnDown.addEventListener('mousedown', ()=>abajo());
 btnDown.addEventListener('mouseup', ()=>arriba());
-
-
-
-
-
 
 
 

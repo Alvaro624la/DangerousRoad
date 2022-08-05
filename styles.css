@@ -219,6 +219,72 @@ body{
     height: 100%;
     background-color: rgb(0, 0, 0)
 }
+.game-over-modal{
+    z-index: 1999999999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.33);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 2s;
+    cursor: default;
+}
+.game-over-modal-message{
+    color: rgb(156, 24, 24);
+    font-size: 3em;
+    font-family: 'Bangers', cursive, Helvetica, Arial;
+    letter-spacing: 20px;
+
+    animation-name: message-in-animation;
+    animation-duration: 1.5s;
+    animation-timing-function: 
+    cubic-bezier(0.5, 0, 0.75, 0);
+}
+@keyframes message-in-animation {
+    from {font-size: 0;}
+    to {font-size: 3em;}
+}
+.btn-restart{
+    z-index: 1999999999;
+    border-radius: 6px;
+    border: 0;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    font-size: 1em;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
+    width: 150px;
+    height: 40px;
+    background: green; /*fallback*/
+    background: linear-gradient(135deg, rgba(245, 225, 198, 0.85), rgba(252, 213, 107, 0.85));
+    margin: 0px 20px;
+    box-shadow: 0 5px rgb(165, 61, 61);
+    transition: 0.1s;
+    cursor: pointer;
+    margin-top: 1em;
+    transition: all 0s; /*para que no se vea al segundo 0*/
+
+    animation-name: btn-restart-in-animation;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+}
+.btn-restart:hover{
+    filter: drop-shadow(0px 0px 10px rgb(196, 253, 196));
+    background: linear-gradient(135deg, rgba(245, 225, 198, 0.85), rgba(252, 213, 107, 0.85));
+    }
+.btn-restart:active{
+    transform: translateY(2px);
+    box-shadow: 0 3px rgb(156, 24, 24);
+}
+@keyframes btn-restart-in-animation {
+    0% {width: 0;}
+    50% {width: 0;}
+    100% {width: 150px;}
+}
 @media (max-width: 500px){
     #micImgContainer{
         padding: 3px;
@@ -253,6 +319,14 @@ body{
     }
     #downBTN{
         margin-top: -20px;
+    }
+    .game-over-modal-message{
+        font-size: 2em;
+        letter-spacing: 10px;
+    }
+    @keyframes message-in-animation {
+        from {font-size: 0;}
+        to {font-size: 2em;}
     }
 }
 @media (max-width: 280px){
@@ -300,5 +374,13 @@ body{
         width: 30px;
         height: 30px;
         margin: 0px;
+    }
+    .game-over-modal-message{
+        font-size: 1.5em;
+        letter-spacing: 10px;
+    }
+    @keyframes message-in-animation {
+        from {font-size: 0;}
+        to {font-size: 1.5em;}
     }
 }
