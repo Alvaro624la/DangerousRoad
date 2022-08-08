@@ -490,8 +490,7 @@ btnOptions.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
-//Aparicion de coches aleatoriamente, sin llegar a aparecer simultaneamente.
-
+//realentizar minimo la mitad de la velocidad al darle a grabar al microfono para que de tiempo
 //con background-color: rgba(255, 255, 255, 0.9); parece niebla
 
 //mandarle link al artista del fondo loop
