@@ -16,7 +16,6 @@ recognition.maxAlternatives = 1;
 //para registrar/grabar la voz
 let micImgContainer = document.getElementById('micImgContainer');
 let micImg = document.getElementById('micImg');
-// recognition.start();
 micImg.className = 'micOff';
 
 function rec(){
@@ -27,23 +26,32 @@ function stop(){
     recognition.stop();
     micImg.className = 'micOff';
 }
-micImgContainer.addEventListener('mousedown', ()=>{
-    if(micImg.className == 'micRecording'){
-        stop();
-    }
-    else if(micImg.className == 'micOff'){
-        rec(); 
-    };
-});
-
-
 //manejar errores al no reconocer la voz
 recognition.onerror = function(event) {
     console.log('Error durante el reconocimiento de voz: ' + event.error);
-    // recognition.start();
 };
 
-////AUDIOS////
+/// VARIABLES ///
+let gameOptionsWindow = document.getElementById('gameOptionsWindow');
+let selectCarColor = document.getElementById('MenuHomeCarColor');
+let btnGameOptionsCancelar = document.getElementById('btnGameOptionsCancelar');
+let btnGameOptionsAceptar = document.getElementById('btnGameOptionsAceptar');
+
+let upContainer = document.getElementById('all-container');
+let homeMenuWindow = document.getElementById('homeMenu');
+let btnStart = document.getElementById('btnHomeMenuStart');
+let btnOptions = document.getElementById('btnHomeMenuOptions');
+
+let videoLoop = document.getElementById('road-loop');
+let person = document.getElementById('person');
+let btnLeft = document.getElementById('leftBTN');
+let btnRight = document.getElementById('rightBTN');
+let btnDown = document.getElementById('downBTN');
+let scoreboard = document.getElementById('scoreboard');
+let points = 0;
+scoreboard.innerHTML = `Score: ${points}`;
+
+/// AUDIOS ///
 //win points//
 const audioPoint = document.createElement('audio');
 audioPoint.preload = 'auto';
@@ -99,20 +107,7 @@ audioAmbient.volume = 0.1;
 audioAmbient.src = './src/ambient.mp3';
 document.body.appendChild(audioAmbient);
 
-audioStart.play();
-audioAmbient.play();
-//////// EMPEZAMOS A MANEJAR EL RECONOCIMIENTO DE VOZ RESULTANTE ////////
-let upContainer = document.getElementById('all-container');
-let videoLoop = document.getElementById('road-loop');
-let person = document.getElementById('person');
-let btnLeft = document.getElementById('leftBTN');
-let btnRight = document.getElementById('rightBTN');
-let btnDown = document.getElementById('downBTN');
-let scoreboard = document.getElementById('scoreboard');
-let points = 0;
-scoreboard.innerHTML = `Score: ${points}`;
-
-/////////////////////CAR/////////////
+///CAR///
 let zIndexNum = 1999999993;
 let carVelocitySec = 2;
 let carVelocityMSec = carVelocitySec*1000;
@@ -121,10 +116,51 @@ let carVelMSecpercentage = (80*carVelocityMSec)/100;
 //el 79% del carVelocitySec en MILISEGUNDOS//
 let crashMSecpercentage = (79*carVelocityMSec)/100;
 
+///WALK///
+let topNumero = 55;
+//colocar persona al cargar página
+person.style.top = `${topNumero}%`;
+
+
+
+function startGame(){
+//////////// FUNCTIONS ////////////
+/// HOME MENU DISAPPEARS ///
+homeMenuWindow.style.display = 'none';
+
+///VIDEO LOOP
+videoLoop.setAttribute('loop', "")
+videoLoop.setAttribute('autoplay', "")
+
+/// MIC EVENTLISTENER ///
+micImgContainer.addEventListener('mousedown', ()=>{
+    if(micImg.className == 'micRecording'){
+        stop();
+    }
+    else if(micImg.className == 'micOff'){
+        rec(); 
+    };
+});
+audioStart.play();
+audioAmbient.play();
+
 function carLeftAppears(){
     let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
+    /// change car color ///
+    if(selectCarColor.value == 'car-default'){
+        car.style.filter = '';
+    };
+    if(selectCarColor.value == 'car-green'){
+        car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
+    };
+    if(selectCarColor.value == 'car-blue'){
+        car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
+    };
+    if(selectCarColor.value == 'car-ugly-1'){
+        car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
+    };
     ///car CSS///
     car.style.position = 'absolute';
     car.style.zIndex = zIndexNum;
@@ -212,6 +248,19 @@ function carRightAppears(){
     let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
+    /// change car color ///
+    if(selectCarColor.value == 'car-default'){
+        car.style.filter = '';
+    };
+    if(selectCarColor.value == 'car-green'){
+        car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
+    };
+    if(selectCarColor.value == 'car-blue'){
+        car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
+    };
+    if(selectCarColor.value == 'car-ugly-1'){
+        car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
+    };
     ///car CSS///
     car.style.position = 'absolute';
     car.style.zIndex = zIndexNum;
@@ -295,11 +344,8 @@ function randomAppears(){
     console.warn(`Clue: Car L/R appears --> ${randomNum.toFixed(1)}`);
 }
 let randomAppearsInterval = window.setInterval(randomAppears, carVelocityMSec);
-///// OTRAS FUNCIONES /////
-//ANDAR
-let topNumero = 55;
-//colocar persona al cargar página
-person.style.top = `${topNumero}%`;
+
+/// WALK ///
 function walk(){
     //arriba
     if(topNumero == 55){
@@ -326,7 +372,7 @@ function arriba(){
     person.style.top = `${topNumero}%`;
 };
 
-//sumar puntos
+/// WIN POINTS ///
 function winPoint(){
     audioPoint.play();
     points++;
@@ -337,7 +383,7 @@ function winPoint(){
     //PROBLEMA CON ASINCRONIA DEL INTERVALO PARA CAMBIAR VARIABLE Y QUE AFECTE
 };
 
-//trabajar con el resultado obtenido
+/// MOVER PERSONA - AUDIO ///
 let i = 0;
 recognition.onresult = (e)=>{
     // console.log(e);
@@ -372,7 +418,7 @@ recognition.onresult = (e)=>{
 //eliminar comportamiento click raton en la pagina
 document.onmousedown = ()=>{return false};
 
-//mover persona al presionar flechas KEYBOARD
+/// MOVER PERSONA - KEYBOARD ///
 window.addEventListener('keydown', keyDown);
 function keyDown(e){
     e.preventDefault();
@@ -400,7 +446,7 @@ function keyUp(e){
             break;
     };
 };
-//mover persona al presionar flechas RATON/BTNs pantalla
+/// MOVER PERSONA - PHONE ///
 btnLeft.addEventListener('mousedown', ()=>{
     person.className = 'person-left';
     audioPersonLR.play();
@@ -413,10 +459,40 @@ btnRight.addEventListener('mousedown', ()=>{
 btnDown.addEventListener('mousedown', ()=>abajo());
 btnDown.addEventListener('mouseup', ()=>arriba());
 
+}; // startGame();
+
+/// HOME MENU ///
+btnStart.addEventListener('mouseover', ()=>audioMenuSelect.play());
+btnStart.addEventListener('mouseup', ()=>{
+    audioMenuIn.play();
+    startGame();
+});
+btnOptions.addEventListener('mouseover', ()=>audioMenuSelect.play());
+btnOptions.addEventListener('mouseup', ()=>{
+    audioMenuIn.play();
+    gameOptionsWindow.style.display = 'block';
+});
+    btnGameOptionsCancelar.addEventListener('mouseover', ()=>audioMenuSelect.play());
+    btnGameOptionsCancelar.addEventListener('mousedown', ()=>audioMenuOut.play());
+    btnGameOptionsCancelar.addEventListener('mouseup', ()=>{
+        gameOptionsWindow.style.display = 'none';
+    });
+    btnGameOptionsAceptar.addEventListener('mouseover', ()=>audioMenuSelect.play());
+    btnGameOptionsAceptar.addEventListener('mousedown', ()=>audioMenuOut.play());
+    btnGameOptionsAceptar.addEventListener('mouseup', ()=>{
+        console.log(selectCarColor.value);
+        
+        gameOptionsWindow.style.display = 'none';
+    });
+
+// selectCarColor.addEventListener('mouseover', ()=>audioMenuSelect.play());
+// selectCarColor.addEventListener('mouseup', ()=>audioMenuIn.play());
 
 
 ///PENDIENTE///
 //Aparicion de coches aleatoriamente, sin llegar a aparecer simultaneamente.
+
+//con background-color: rgba(255, 255, 255, 0.9); parece niebla
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz

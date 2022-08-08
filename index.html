@@ -26,11 +26,36 @@
     </nav>
     <main id="main" class="main">
         <article class="article">
+            <section id="gameOptionsWindow">
+                <div id="gameOptions" class="game-options">
+                    <div>
+                        <label class="options-labels">Select car color</label>
+                        <div id="MenuHomeCarColorCont">
+                            <select 
+                            onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+                            id="MenuHomeCarColor" name="MenuHomeCarColor">
+                                <option label="Default" value="car-default" selected value></option>
+                                <option label="Green" value="car-green"></option>
+                                <option label="Blue" value="car-blue"></option>
+                                <option label="Ugly" value="car-ugly-1"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="optionsCancelarAceptarCont">
+                    <p id="btnGameOptionsCancelar">Cancelar</p>
+                    <p id="btnGameOptionsAceptar">Aceptar</p>
+                </div>
+            </section>
             <section id="all-container" class="all-container">
+                <div id="homeMenu" class="home-menu">
+                    <button id="btnHomeMenuStart" class="home-menu__btn-start">START</button>
+                    <button id="btnHomeMenuOptions" class="home-menu__btn-options">OPTIONS</button>
+                </div>
                 <div id="micImgContainer">
                     <img id="micImg" class="micOff" src="./src/mic.png" alt="mic-info-icon">
                 </div>                
-                <video id="road-loop" class="" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" autoplay loop muted></video>
+                <video id="road-loop" class="" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" muted></video>
                 <img id="person" class="person-right" src="src/person.png" alt="person-walking-img">
                 <!-- <img id="car" src="./src/car1.png"> -->
             </section>
@@ -45,7 +70,6 @@
                 </div>                  
                 <section class="scoreboard-container__black-bg"></section>
             </section>
-            
         </article>
         <aside>
         </aside>

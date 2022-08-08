@@ -7,10 +7,123 @@ body{
     background-color: #000;
     /*evitar overflow y scroll con el bg black que esconde la persona con 100vh de height*/
     overflow: hidden;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
 }
 .all-container{
     position: relative;
+}
+.home-menu{
+    z-index: 1999999998;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: url('./src/HomeMenu-bg.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.home-menu__btn-start{
+    border-radius: 6px;
+    border: 0;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    font-size: 1em;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
+    width: 150px;
+    height: 40px;
+    background: green; /*fallback*/
+    background: linear-gradient(135deg, rgba(245, 225, 198, 0.85), rgba(252, 213, 107, 0.85));
+    margin: 0px 20px;
+    box-shadow: 0 5px rgb(78, 164, 61);
+    transition: box-shadow 0.1s;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.home-menu__btn-start:hover{
+    filter: drop-shadow(0px 0px 10px rgb(196, 253, 196));
+    background: linear-gradient(135deg, rgba(245, 225, 198, .9), rgba(252, 213, 107, .9));
+    }
+.home-menu__btn-start:active{
+    transform: translateY(2px);
+    box-shadow: 0 3px rgb(60, 136, 45);
+}
+.home-menu__btn-options{
+    border-radius: 6px;
+    border: 0;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    font-size: 1em;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
+    width: 150px;
+    height: 40px;
+    background: green; /*fallback*/
+    background: linear-gradient(135deg, rgba(245, 225, 198, 0.9), rgba(252, 213, 107, 0.9));
+    margin: 0px 20px;
+    box-shadow: 0 5px rgb(78, 164, 61);
+    transition: box-shadow 0.1s;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.home-menu__btn-options:hover{
+    filter: drop-shadow(0px 0px 10px rgb(196, 253, 196));
+    background: linear-gradient(135deg, rgba(245, 225, 198, 1), rgba(252, 213, 107, 1));
+    }
+.home-menu__btn-options:active{
+    transform: translateY(2px);
+    box-shadow: 0 3px rgb(60, 136, 45);
+}
+#gameOptionsWindow{
+    z-index: 1999999999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    /* display: grid; */
+    /* align-items: center; */
+
+    display: none;
+}
+.game-options{
+    display: flex;
+    justify-content: center;
+    padding: 4em 0;
+}
+.options-labels{
+    color: #fff;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
+}
+#MenuHomeCarColorCont{
+    width: 92px;
+    height: 140px;
+}
+#MenuHomeCarColor{
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
+    padding: 5px;
+}
+#MenuHomeCarColor > option{
+    font-size: 1em;
+    padding: 5px;
+}
+#optionsCancelarAceptarCont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+#optionsCancelarAceptarCont > p{
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
 }
 #micImgContainer{
     position: absolute;
@@ -74,12 +187,6 @@ body{
     ;
     transition: transform cubic-bezier(.63,-0.39,.69,.71) 1s;
 }
-/* .personDown{
-    top: 75%;
-}
-.personUp{
-    top: 56%;
-} */
 .tooltip{
     background-color: rgba(164, 164, 164, 0.7);
     border-radius: 10px;
@@ -102,16 +209,6 @@ body{
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-/* #car{
-    position: absolute;
-    z-index: 1999999993;
-
-    animation-name: car-animation;
-    animation-duration: 3s;
-    animation-timing-function: 
-    ease-in;
-    animation-iteration-count: infinite;
-} */
 @keyframes car-left-animation {
     0% {
         width: 0%;
@@ -157,7 +254,7 @@ body{
 }
 .scoreboard-container{
     position: relative;
-    height: 100vh;
+    height: 100%;
 }
 .btnsContainer{
     position: relative;
@@ -216,11 +313,11 @@ body{
     position: absolute;
     top: -3.2px;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: rgb(0, 0, 0)
 }
 .game-over-modal{
-    z-index: 1999999999;
+    z-index: 1999999997;
     position: absolute;
     top: 0;
     left: 0;
@@ -250,7 +347,7 @@ body{
     to {font-size: 3em;}
 }
 .btn-restart{
-    z-index: 1999999999;
+    z-index: 1999999997;
     border-radius: 6px;
     border: 0;
     font-weight: 600;
@@ -308,6 +405,12 @@ body{
 }
 /*para horizontal*/
 @media (max-width: 400px){
+    .home-menu__btn-start{
+        width: 100px;
+    }
+    .home-menu__btn-options{
+        width: 100px;
+    }
     #micImgContainer{
         padding: 2px;
     }
@@ -330,6 +433,18 @@ body{
     }
 }
 @media (max-width: 280px){
+    .home-menu__btn-start{
+        width: auto;
+        height: auto;
+        padding: 10px;
+        font-size: .7em;
+    }
+    .home-menu__btn-options{
+        width: auto;
+        height: auto;
+        padding: 10px;
+        font-size: .7em;
+    }
     #micImgContainer{
         padding: 2px;
     }
