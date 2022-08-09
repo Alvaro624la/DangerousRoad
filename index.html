@@ -9,7 +9,7 @@
     <link rel="author" href="https://www.linkedin.com/in/%C3%A1lvaro-de-prado-calle-740062221/">
     <link rel="icon" sizes="64x64" href="./src/icon.png">
     <title>DangerousRoad</title>
-    <link href="styles.css" type="text/css" rel="stylesheet">
+    <link href="./app.css" type="text/css" rel="stylesheet">
     <!--GOOGLE FONTS (font-family: 'Bangers', cursive;)-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,11 +25,11 @@
     <nav>
     </nav>
     <main id="main" class="main">
-        <article class="article">
-            <section id="gameCreditsWindow">
-                <div id="gameCreditsContent" class="gameCreditsContent">
+        <article class="main__article">
+            <section id="gameCreditsWindow" class="main__article__gameCreditsWindow">
+                <div id="gameCreditsContent" class="main__article__gameCreditsWindow__content">
                     <h2>Credits</h2>
-                    <div class="game-credits">
+                    <div class="main__article__gameCreditsWindow__content__details">
                         <h3>Game Director / Programmer</h3>
                             <h4>Alvaro de Prado</h4>
                         <h3>Game Designer</h3>
@@ -43,14 +43,14 @@
                             <h4>SamplingSamTheMarylandMan</h4>
                 </div>
             </section>
-            <section id="gameOptionsWindow">
-                <div id="gameOptions" class="game-options">
-                    <div>
-                        <label class="options-labels">Select car color</label>
-                        <div id="MenuHomeCarColorContCarColor">
+            <section id="gameOptionsWindow" class="main__article__gameOptionsWindow">
+                <div id="gameOptions" class="main__article__gameOptionsWindow__content">
+                    <div class="main__article__gameOptionsWindow__content__div1">
+                        <label class="main__article__gameOptionsWindow__content__div1__label">Select car color</label>
+                        <div id="MenuHomeCarColorContCarColor" class="main__article__gameOptionsWindow__content__div1__div1">
                             <select 
                             onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
-                            id="MenuHomeCarColor" class="MenuHomeCarColor" name="MenuHomeCarColor">
+                            id="MenuHomeCarColor" class="main__article__gameOptionsWindow__content__div1__div1__select" name="MenuHomeCarColor">
                                 <option label="Default" value="car-default" selected value></option>
                                 <option label="Green" value="car-green"></option>
                                 <option label="Blue" value="car-blue"></option>
@@ -58,50 +58,52 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div>
-                        <label class="options-labels">Select environmental conditions</label>
-                        <div id="MenuHomeCarColorContClima">
+                    <!-- <div class="main__article__gameOptionsWindow__content__div2">
+                        <label class="main__article__gameOptionsWindow__content__div2__label">Select environmental conditions</label>
+                        <div id="MenuHomeCarColorContClima" class="main__article__gameOptionsWindow__content__div2__div1">
                             <select 
                             onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
-                            id="MenuHomeClima" class="MenuHomeCarColor" name="MenuHomeCarColor">
+                            id="MenuHomeClima" class="main__article__gameOptionsWindow__content__div2__div1__select" name="MenuHomeCarColor">
                                 <option label="Default" value="clima-default" selected value></option>
                                 <option label="Fog" value="clima-fog"></option>
                             </select>
                         </div>
                     </div> -->
                 </div>
-                <div id="optionsCancelarAceptarCont">
-                    <a id="btnGameOptionsCancelar">Cancelar</a>
-                    <a id="btnGameOptionsAceptar">Aceptar</a>
+                <div id="optionsCancelarAceptarCont" class="main__article__gameOptionsWindow__btns-container">
+                    <a id="btnGameOptionsCancelar" class="main__article__gameOptionsWindow__btns-container__cancel">Cancelar</a>
+                    <a id="btnGameOptionsAceptar" class="main__article__gameOptionsWindow__btns-container__accept">Aceptar</a>
                 </div>
             </section>
-            <section id="all-container" class="all-container">
-                <div id="homeMenu" class="home-menu">
-                    <img id="btnMute" class="home-menu__btn-mute" src="./src/mute.png">
-                    <div class="home-menu__flex1">
-                        <button id="btnHomeMenuStart" class="home-menu__btn">START</button>
-                        <button id="btnHomeMenuOptions" class="home-menu__btn">OPTIONS</button>
+            <section id="all-container" class="main__article__all-container">
+                <div id="homeMenu" class="main__article__all-container__home-menu-container">
+                    <img id="btnMute" class="main__article__all-container__home-menu-container__btn-mute" src="./src/mute.png">
+                    <div class="main__article__all-container__home-menu-container__btn-container1">
+                        <button id="btnHomeMenuStart" class="main__article__all-container__home-menu-container__btn-container1__start">START</button>
+                        <button id="btnHomeMenuOptions" class="main__article__all-container__home-menu-container__btn-container1__options">OPTIONS</button>
                     </div>
-                    <div class="home-menu__flex2">
-                        <button id="btnHomeMenuCredits" class="home-menu__btn">CREDITS</button>
+                    <div class="main__article__all-container__home-menu-container__btn-container2">
+                        <button id="btnHomeMenuCredits" class="main__article__all-container__home-menu-container__btn-container2__credits">CREDITS</button>
                     </div>
                 </div>
-                <div id="micImgContainer">
+                <div id="micImgContainer" class="main__article__all-container__mic-img-container">
+                    <!--Mirar clase 'micOff' que afecta a JS-->
                     <img id="micImg" class="micOff" src="./src/mic.png" alt="mic-info-icon">
                 </div>                
-                <video id="road-loop" class="" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" muted autoplay loop></video>
+                <video id="road-loop" class="main__article__all-container__bg-video-loop" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" muted autoplay loop></video>
+                <!--Mirar clase 'person-right' que afecta a JS-->
                 <img id="person" class="person-right" src="src/person.png" alt="person-walking-img">
             </section>
-            <section class="scoreboard-container">
-                <p id="scoreboard" class="scoreboard-container__scoreboard"></p>
-                <div id="btnsContainer" class="btnsContainer">
-                    <button type="button" id="leftBTN"></button>
-                    <button type="button" id="rightBTN"></button>
+            <section class="main__article__scoreboard-container">
+                <p id="scoreboard" class="main__article__scoreboard-container__content"></p>
+                <div id="btnsContainer" class="main__article__scoreboard-container__btns-container1">
+                    <button type="button" id="leftBTN" class="main__article__scoreboard-container__btns-container1__left"></button>
+                    <button type="button" id="rightBTN" class="main__article__scoreboard-container__btns-container1__right"></button>
                 </div>
-                <div id="btnsContainer" class="btnsContainer">
-                    <button type="button" id="downBTN"></button>
+                <div id="btnsContainer" class="main__article__scoreboard-container__btns-container2">
+                    <button type="button" id="downBTN" class="main__article__scoreboard-container__btns-container2__down"></button>
                 </div>                  
-                <section class="scoreboard-container__black-bg"></section>
+                <section class="main__article__scoreboard-container__bg-black"></section>
             </section>
         </article>
         <aside>
@@ -109,6 +111,6 @@
     </main>
     <footer>
     </footer>
-<script src="app.js"></script>
+<script src="./bundle.js"></script>
 </body>
 </html>

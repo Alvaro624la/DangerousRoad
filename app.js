@@ -492,7 +492,7 @@ btnMute.addEventListener('click', (e)=>{
     if(e.target.src == 'http://127.0.0.1:5500/src/mute.png'){
         btnMute.src = 'http://127.0.0.1:5500/src/unmute.png';
         audioHomeMenu.play();
-    } else {
+    } else if(e.target.src == 'http://127.0.0.1:5500/src/unmute.png'){
         btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
         audioHomeMenu.pause();
     };
@@ -505,7 +505,6 @@ btnStart.addEventListener('mouseup', ()=>{
 });
 btnOptions.addEventListener('mouseover', ()=>audioMenuSelect.play());
 btnOptions.addEventListener('mouseup', ()=>{
-    audioMenuIn.play();
     gameOptionsWindow.style.display = 'block';
 });
     btnGameOptionsCancelar.addEventListener('mouseover', ()=>audioMenuSelect.play());
@@ -521,7 +520,7 @@ btnOptions.addEventListener('mouseup', ()=>{
     });
 btnCredits.addEventListener('mouseover', ()=>{audioMenuSelect.play()});
 btnCredits.addEventListener('mouseup', ()=>{
-    audioMenuIn.play();
+    audioHomeMenu.pause();
     audioCredits.play();
     gameCreditsContent.style.animationDuration = '17s';
     gameCreditsWindow.style.display = 'block';
@@ -530,12 +529,14 @@ btnCredits.addEventListener('mouseup', ()=>{
         gameCreditsWindow.style.display = 'none';
         gameCreditsContent.style.animationDuration = '0s';
         audioCredits.pause();
+        btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     }, 19000);
 });
     gameCreditsWindow.addEventListener('click', ()=>{
         gameCreditsWindow.style.display = 'none';
         gameCreditsContent.style.animationDuration = '0s';
         audioCredits.pause();
+        btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     });
 // selectCarColor.addEventListener('mouseover', ()=>audioMenuSelect.play());
 // selectCarColor.addEventListener('mouseup', ()=>audioMenuIn.play());
