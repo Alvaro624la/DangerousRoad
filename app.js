@@ -32,10 +32,17 @@ recognition.onerror = function(event) {
 };
 
 /// VARIABLES ///
+let btnMute = document.getElementById('btnMute');
+
 let gameOptionsWindow = document.getElementById('gameOptionsWindow');
 let selectCarColor = document.getElementById('MenuHomeCarColor');
+let selectClima = document.getElementById('MenuHomeClima');
 let btnGameOptionsCancelar = document.getElementById('btnGameOptionsCancelar');
 let btnGameOptionsAceptar = document.getElementById('btnGameOptionsAceptar');
+
+let btnCredits = document.getElementById('btnHomeMenuCredits');
+let gameCreditsWindow = document.getElementById('gameCreditsWindow');
+let gameCreditsContent = document.getElementById('gameCreditsContent');
 
 let upContainer = document.getElementById('all-container');
 let homeMenuWindow = document.getElementById('homeMenu');
@@ -52,6 +59,19 @@ let points = 0;
 scoreboard.innerHTML = `Score: ${points}`;
 
 /// AUDIOS ///
+//home menu//
+const audioHomeMenu = document.createElement('audio');
+audioHomeMenu.preload = 'auto';
+audioHomeMenu.volume = 0.8;
+audioHomeMenu.src = './src/home-menu.mp3';
+document.body.appendChild(audioHomeMenu);
+// audioHomeMenu.setAttribute('muted', '');
+//home menu//
+const audioCredits = document.createElement('audio');
+audioCredits.preload = 'auto';
+audioCredits.volume = 0.2;
+audioCredits.src = './src/credits.mp3';
+document.body.appendChild(audioCredits);
 //win points//
 const audioPoint = document.createElement('audio');
 audioPoint.preload = 'auto';
@@ -103,7 +123,7 @@ document.body.appendChild(audioMenuOut);
 //ambient//
 const audioAmbient = document.createElement('audio');
 audioAmbient.preload = 'auto';
-audioAmbient.volume = 0.1;
+audioAmbient.volume = 0.2;
 audioAmbient.src = './src/ambient.mp3';
 document.body.appendChild(audioAmbient);
 
@@ -122,15 +142,18 @@ let topNumero = 55;
 person.style.top = `${topNumero}%`;
 
 
-
 function startGame(){
+/// clima ///
+// if(selectClima.value == 'clima-fog'){
+//     upContainer.style.filter = 'invert(80%) sepia(0%) saturate(9%) hue-rotate(187deg) brightness(89%) contrast(82%)';
+// } else {upContainer.style.filter = ''}
 //////////// FUNCTIONS ////////////
 /// HOME MENU DISAPPEARS ///
 homeMenuWindow.style.display = 'none';
 
-///VIDEO LOOP
-videoLoop.setAttribute('loop', "")
-videoLoop.setAttribute('autoplay', "")
+///VIDEO LOOP (no funciona bien, nose porque, y lo he puesto manual al poner el homeMenu en display: none;)
+// videoLoop.setAttribute('loop', '');
+// videoLoop.setAttribute('autoplay', "");
 
 /// MIC EVENTLISTENER ///
 micImgContainer.addEventListener('mousedown', ()=>{
@@ -141,6 +164,7 @@ micImgContainer.addEventListener('mousedown', ()=>{
         rec(); 
     };
 });
+
 audioStart.play();
 audioAmbient.play();
 
@@ -462,9 +486,21 @@ btnDown.addEventListener('mouseup', ()=>arriba());
 }; // startGame();
 
 /// HOME MENU ///
+
+// mute audioHomeMenu music //
+btnMute.addEventListener('click', (e)=>{
+    if(e.target.src == 'http://127.0.0.1:5500/src/mute.png'){
+        btnMute.src = 'http://127.0.0.1:5500/src/unmute.png';
+        audioHomeMenu.play();
+    } else {
+        btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
+        audioHomeMenu.pause();
+    };
+});
 btnStart.addEventListener('mouseover', ()=>audioMenuSelect.play());
 btnStart.addEventListener('mouseup', ()=>{
     audioMenuIn.play();
+    audioHomeMenu.pause();
     startGame();
 });
 btnOptions.addEventListener('mouseover', ()=>audioMenuSelect.play());
@@ -475,23 +511,40 @@ btnOptions.addEventListener('mouseup', ()=>{
     btnGameOptionsCancelar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsCancelar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsCancelar.addEventListener('mouseup', ()=>{
+        selectCarColor.value = 'car-default';
         gameOptionsWindow.style.display = 'none';
     });
     btnGameOptionsAceptar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsAceptar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsAceptar.addEventListener('mouseup', ()=>{
-        console.log(selectCarColor.value);
-        
         gameOptionsWindow.style.display = 'none';
     });
-
+btnCredits.addEventListener('mouseover', ()=>{audioMenuSelect.play()});
+btnCredits.addEventListener('mouseup', ()=>{
+    audioMenuIn.play();
+    audioCredits.play();
+    gameCreditsContent.style.animationDuration = '17s';
+    gameCreditsWindow.style.display = 'block';
+    // por si no le das a cerrar, se cierra solo 2 seg despues que acabe la animacion CSS
+    window.setTimeout(()=>{
+        gameCreditsWindow.style.display = 'none';
+        gameCreditsContent.style.animationDuration = '0s';
+        audioCredits.pause();
+    }, 19000);
+});
+    gameCreditsWindow.addEventListener('click', ()=>{
+        gameCreditsWindow.style.display = 'none';
+        gameCreditsContent.style.animationDuration = '0s';
+        audioCredits.pause();
+    });
 // selectCarColor.addEventListener('mouseover', ()=>audioMenuSelect.play());
 // selectCarColor.addEventListener('mouseup', ()=>audioMenuIn.play());
 
 
 ///PENDIENTE///
+//arreglar error Uncaught (in promise) DOMException: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD
 //realentizar minimo la mitad de la velocidad al darle a grabar al microfono para que de tiempo
-//con background-color: rgba(255, 255, 255, 0.9); parece niebla
+//https://es.stackoverflow.com/questions/368727/por-que-cuando-cambio-el-valor-de-una-variable-dentro-de-un-foreach-no-se-refle 
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz

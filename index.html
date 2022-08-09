@@ -26,14 +26,31 @@
     </nav>
     <main id="main" class="main">
         <article class="article">
+            <section id="gameCreditsWindow">
+                <div id="gameCreditsContent" class="gameCreditsContent">
+                    <h2>Credits</h2>
+                    <div class="game-credits">
+                        <h3>Game Director / Programmer</h3>
+                            <h4>Alvaro de Prado</h4>
+                        <h3>Game Designer</h3>
+                            <h4>Alvaro de Prado</h4>
+                        <h3>Background designer</h3>
+                            <h4>Ssuperguz Productions</h4>
+                        <h3>Music / Sounds</h3>
+                            <h4>freesound.org</h4>
+                            <h4>sonically_sound</h4>
+                            <h4>landlucky</h4>
+                            <h4>SamplingSamTheMarylandMan</h4>
+                </div>
+            </section>
             <section id="gameOptionsWindow">
                 <div id="gameOptions" class="game-options">
                     <div>
                         <label class="options-labels">Select car color</label>
-                        <div id="MenuHomeCarColorCont">
+                        <div id="MenuHomeCarColorContCarColor">
                             <select 
-                            onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
-                            id="MenuHomeCarColor" name="MenuHomeCarColor">
+                            onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+                            id="MenuHomeCarColor" class="MenuHomeCarColor" name="MenuHomeCarColor">
                                 <option label="Default" value="car-default" selected value></option>
                                 <option label="Green" value="car-green"></option>
                                 <option label="Blue" value="car-blue"></option>
@@ -41,23 +58,39 @@
                             </select>
                         </div>
                     </div>
+                    <!-- <div>
+                        <label class="options-labels">Select environmental conditions</label>
+                        <div id="MenuHomeCarColorContClima">
+                            <select 
+                            onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+                            id="MenuHomeClima" class="MenuHomeCarColor" name="MenuHomeCarColor">
+                                <option label="Default" value="clima-default" selected value></option>
+                                <option label="Fog" value="clima-fog"></option>
+                            </select>
+                        </div>
+                    </div> -->
                 </div>
                 <div id="optionsCancelarAceptarCont">
-                    <p id="btnGameOptionsCancelar">Cancelar</p>
-                    <p id="btnGameOptionsAceptar">Aceptar</p>
+                    <a id="btnGameOptionsCancelar">Cancelar</a>
+                    <a id="btnGameOptionsAceptar">Aceptar</a>
                 </div>
             </section>
             <section id="all-container" class="all-container">
                 <div id="homeMenu" class="home-menu">
-                    <button id="btnHomeMenuStart" class="home-menu__btn-start">START</button>
-                    <button id="btnHomeMenuOptions" class="home-menu__btn-options">OPTIONS</button>
+                    <img id="btnMute" class="home-menu__btn-mute" src="./src/mute.png">
+                    <div class="home-menu__flex1">
+                        <button id="btnHomeMenuStart" class="home-menu__btn">START</button>
+                        <button id="btnHomeMenuOptions" class="home-menu__btn">OPTIONS</button>
+                    </div>
+                    <div class="home-menu__flex2">
+                        <button id="btnHomeMenuCredits" class="home-menu__btn">CREDITS</button>
+                    </div>
                 </div>
                 <div id="micImgContainer">
                     <img id="micImg" class="micOff" src="./src/mic.png" alt="mic-info-icon">
                 </div>                
-                <video id="road-loop" class="" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" muted></video>
+                <video id="road-loop" class="" src="./src/road-loop2.mp4" preload="auto"  mediagroup="background-road" muted autoplay loop></video>
                 <img id="person" class="person-right" src="src/person.png" alt="person-walking-img">
-                <!-- <img id="car" src="./src/car1.png"> -->
             </section>
             <section class="scoreboard-container">
                 <p id="scoreboard" class="scoreboard-container__scoreboard"></p>

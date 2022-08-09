@@ -7,7 +7,7 @@ body{
     background-color: #000;
     /*evitar overflow y scroll con el bg black que esconde la persona con 100vh de height*/
     overflow: hidden;
-    /* scroll-behavior: smooth; */
+    scroll-behavior: smooth;
 }
 .all-container{
     position: relative;
@@ -22,13 +22,30 @@ body{
     background-color: rgba(255, 255, 255, 1);
     background-image: url('./src/HomeMenu-bg.jpg');
     background-size: cover;
+    display: grid;
+    place-content: center;
+}
+.home-menu__flex1{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
-.home-menu__btn-start{
+.home-menu__flex2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+#btnMute{
+    cursor: pointer;
+    position: absolute;
+    width: 8%;
+    margin: .5em;
+}
+.home-menu__btn{
     border-radius: 6px;
     border: 0;
     font-weight: 600;
@@ -37,44 +54,19 @@ body{
     font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
     width: 150px;
     height: 40px;
-    background: green; /*fallback*/
-    background: linear-gradient(135deg, rgba(245, 225, 198, 0.85), rgba(252, 213, 107, 0.85));
-    margin: 0px 20px;
-    box-shadow: 0 5px rgb(78, 164, 61);
-    transition: box-shadow 0.1s;
-    cursor: pointer;
-    margin-top: 1em;
-}
-.home-menu__btn-start:hover{
-    filter: drop-shadow(0px 0px 10px rgb(196, 253, 196));
-    background: linear-gradient(135deg, rgba(245, 225, 198, .9), rgba(252, 213, 107, .9));
-    }
-.home-menu__btn-start:active{
-    transform: translateY(2px);
-    box-shadow: 0 3px rgb(60, 136, 45);
-}
-.home-menu__btn-options{
-    border-radius: 6px;
-    border: 0;
-    font-weight: 600;
-    color: rgb(0, 0, 0);
-    font-size: 1em;
-    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
-    width: 150px;
-    height: 40px;
-    background: green; /*fallback*/
-    background: linear-gradient(135deg, rgba(245, 225, 198, 0.9), rgba(252, 213, 107, 0.9));
-    margin: 0px 20px;
-    box-shadow: 0 5px rgb(78, 164, 61);
-    transition: box-shadow 0.1s;
-    cursor: pointer;
-    margin-top: 1em;
-}
-.home-menu__btn-options:hover{
-    filter: drop-shadow(0px 0px 10px rgb(196, 253, 196));
+    background: rgba(252, 213, 107, 1); /*fallback*/
     background: linear-gradient(135deg, rgba(245, 225, 198, 1), rgba(252, 213, 107, 1));
+    margin: 0px 20px;
+    box-shadow: 0 5px rgb(78, 164, 61);
+    transition: box-shadow 0.1s;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.home-menu__btn:hover{
+    filter: drop-shadow(0px 0px 10px rgb(196, 253, 196));
+    background: linear-gradient(135deg, rgba(245, 225, 198, .9), rgba(252, 213, 107, 1));
     }
-.home-menu__btn-options:active{
+.home-menu__btn:active{
     transform: translateY(2px);
     box-shadow: 0 3px rgb(60, 136, 45);
 }
@@ -92,26 +84,72 @@ body{
 
     display: none;
 }
-.game-options{
+.game-options > div{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: 4em 0;
+    padding: 10px;
 }
 .options-labels{
     color: #fff;
     font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
 }
-#MenuHomeCarColorCont{
+#gameCreditsWindow{
+    z-index: 1999999999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: none;
+}
+.gameCreditsContent{
+    transform: translateY(100vh);
+    animation-name: credits;
+    animation-timing-function: linear;
+    animation-duration: 15s;
+}
+@keyframes credits {
+    from {transform: translateY(100vh)}
+    to {transform: translateY(-100vw)}
+}
+#gameCreditsWindow > h2{
+    color: #fff;
+    margin-bottom: 15px;
+}
+.game-credits > h3{
+    margin-bottom: 10px;
+    margin-top: 30px;
+    color: rgb(209, 135, 75);
+}
+.game-credits > h4{
+    margin-bottom: 7.5px;
+}
+#MenuHomeCarColorContCarColor{
     width: 92px;
     height: 140px;
 }
-#MenuHomeCarColor{
+#MenuHomeCarColorContClima{
+    width: 92px;
+    height: 80px;
+}
+.MenuHomeCarColor{
     border-radius: 5px;
     font-size: 1em;
     font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
     padding: 5px;
 }
-#MenuHomeCarColor > option{
+.MenuHomeCarColor > option{
     font-size: 1em;
     padding: 5px;
 }
@@ -122,13 +160,13 @@ body{
     justify-content: space-around;
     font-size: 1.2em;
 }
-#optionsCancelarAceptarCont > p{
+#optionsCancelarAceptarCont > a{
     cursor: pointer;
     color: #fff;
     font-family: 'Chakra Petch', sans-serif, Helvetica, Arial;
     padding: 8px;
 }
-#optionsCancelarAceptarCont > p:hover{
+#optionsCancelarAceptarCont > a:hover{
     color: rgb(211, 211, 211);
 }
 #micImgContainer{
