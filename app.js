@@ -45,6 +45,7 @@ recognition.onerror = function(event) {
 
 /// VARIABLES ///
 let btnMute = document.getElementById('btnMute');
+btnMute.alt = 'mute/unmute main music';
 
 let gameOptionsWindow = document.getElementById('gameOptionsWindow');
 let selectCarColor = document.getElementById('MenuHomeCarColor');
@@ -284,16 +285,16 @@ function carRightAppears(){
     car.src = './src/car1.png';
     upContainer.appendChild(car);
     /// change car color ///
-    if(selectCarColor.value == 'car-default'){
+    if(GAME.carColor == 'default'){
         car.style.filter = '';
     };
-    if(selectCarColor.value == 'car-green'){
+    if(GAME.carColor == 'green'){
         car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
     };
-    if(selectCarColor.value == 'car-blue'){
+    if(GAME.carColor == 'blue'){
         car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
     };
-    if(selectCarColor.value == 'car-ugly-1'){
+    if(GAME.carColor == 'ugly-1'){
         car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
     };
     ///car CSS///
@@ -511,14 +512,24 @@ btnMute.addEventListener('click', (e)=>{
 //al iniciar --> mute
 btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
 
-btnStart.addEventListener('mouseover', ()=>audioMenuSelect.play());
+//Autoplay policy in Chrome (Chrome's autoplay policies)
+//Al menos interactuar una vez en el documento (click, tap, etc.) para autoreproducir algun sonido:
+window.addEventListener('click', ()=>{
+    autoplayHomeBtnsAllowed(); 
+});
+function autoplayHomeBtnsAllowed(){
+    btnStart.addEventListener('mouseover', ()=>{
+        audioMenuSelect.play();
+    });
+    btnOptions.addEventListener('mouseover', ()=>audioMenuSelect.play());
+    btnCredits.addEventListener('mouseover', ()=>{audioMenuSelect.play()});
+};
 btnStart.addEventListener('mouseup', ()=>{
     audioMenuIn.play();
     audioHomeMenu.pause();
     btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     startGame();
 });
-btnOptions.addEventListener('mouseover', ()=>audioMenuSelect.play());
 btnOptions.addEventListener('mouseup', ()=>{
     gameOptionsWindow.style.display = 'block';
 });
@@ -526,7 +537,6 @@ btnOptions.addEventListener('mouseup', ()=>{
     btnGameOptionsCancelar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsCancelar.addEventListener('mouseup', ()=>{
         selectCarColor.value = GAME.carColor;
-        console.log(selectCarColor.value);
         gameOptionsWindow.style.display = 'none';
     });
     btnGameOptionsAceptar.addEventListener('mouseover', ()=>audioMenuSelect.play());
@@ -535,7 +545,6 @@ btnOptions.addEventListener('mouseup', ()=>{
         GAME.carColor = selectCarColor.value;
         gameOptionsWindow.style.display = 'none';
     });
-btnCredits.addEventListener('mouseover', ()=>{audioMenuSelect.play()});
 btnCredits.addEventListener('mouseup', ()=>{
     audioHomeMenu.pause();
     btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
@@ -557,13 +566,7 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
-//arreglar error Uncaught (in promise) DOMException: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD
 //realentizar minimo la mitad de la velocidad al darle a grabar al microfono para que de tiempo
-//https://es.stackoverflow.com/questions/368727/por-que-cuando-cambio-el-valor-de-una-variable-dentro-de-un-foreach-no-se-refle 
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz
-
-
-///CONCLUSION o APRENDER MÁS///
-//Crear un objeto PERSONA.estado == 'viva' y cambiarlo a 'muerta' cuando GAME OVER, no funciona de nada (si que cambia el valor de esa parte del objeto, pero no parece que pueda hacer nada. También probé con una variable global en lugar de objeto, llamada personaEstado, pero nada). Finalmente tuve que usar removeEventListener manualmente en todos los eventos creados.
