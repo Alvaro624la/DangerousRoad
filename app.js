@@ -1,6 +1,18 @@
+const GAME = {
+    personState: 'vivo',
+    // carColor: {
+    //     default: '',
+    //     green: 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)',
+    //     blue: 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)',
+    //     ugly: 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'
+    // },
+    carColor: 'default',
+    homeMusic: 'mute'
+};
+
+
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-
 
 //definir una instancia de reconocimiento de voz
 const recognition = new SpeechRecognition();
@@ -61,11 +73,9 @@ scoreboard.innerHTML = `Score: ${points}`;
 /// AUDIOS ///
 //home menu//
 const audioHomeMenu = document.createElement('audio');
-audioHomeMenu.preload = 'auto';
 audioHomeMenu.volume = 0.8;
 audioHomeMenu.src = './src/home-menu.mp3';
 document.body.appendChild(audioHomeMenu);
-// audioHomeMenu.setAttribute('muted', '');
 //home menu//
 const audioCredits = document.createElement('audio');
 audioCredits.preload = 'auto';
@@ -169,20 +179,21 @@ audioStart.play();
 audioAmbient.play();
 
 function carLeftAppears(){
+    console.log(GAME.carColor);
     let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
     /// change car color ///
-    if(selectCarColor.value == 'car-default'){
+    if(GAME.carColor == 'default'){
         car.style.filter = '';
     };
-    if(selectCarColor.value == 'car-green'){
+    if(GAME.carColor == 'green'){
         car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
     };
-    if(selectCarColor.value == 'car-blue'){
+    if(GAME.carColor == 'blue'){
         car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
     };
-    if(selectCarColor.value == 'car-ugly-1'){
+    if(GAME.carColor == 'ugly-1'){
         car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
     };
     ///car CSS///
@@ -497,10 +508,14 @@ btnMute.addEventListener('click', (e)=>{
         audioHomeMenu.pause();
     };
 });
+//al iniciar --> mute
+btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
+
 btnStart.addEventListener('mouseover', ()=>audioMenuSelect.play());
 btnStart.addEventListener('mouseup', ()=>{
     audioMenuIn.play();
     audioHomeMenu.pause();
+    btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     startGame();
 });
 btnOptions.addEventListener('mouseover', ()=>audioMenuSelect.play());
@@ -510,17 +525,20 @@ btnOptions.addEventListener('mouseup', ()=>{
     btnGameOptionsCancelar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsCancelar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsCancelar.addEventListener('mouseup', ()=>{
-        selectCarColor.value = 'car-default';
+        selectCarColor.value = GAME.carColor;
+        console.log(selectCarColor.value);
         gameOptionsWindow.style.display = 'none';
     });
     btnGameOptionsAceptar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsAceptar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsAceptar.addEventListener('mouseup', ()=>{
+        GAME.carColor = selectCarColor.value;
         gameOptionsWindow.style.display = 'none';
     });
 btnCredits.addEventListener('mouseover', ()=>{audioMenuSelect.play()});
 btnCredits.addEventListener('mouseup', ()=>{
     audioHomeMenu.pause();
+    btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     audioCredits.play();
     gameCreditsContent.style.animationDuration = '17s';
     gameCreditsWindow.style.display = 'block';
@@ -529,17 +547,13 @@ btnCredits.addEventListener('mouseup', ()=>{
         gameCreditsWindow.style.display = 'none';
         gameCreditsContent.style.animationDuration = '0s';
         audioCredits.pause();
-        btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     }, 19000);
 });
     gameCreditsWindow.addEventListener('click', ()=>{
         gameCreditsWindow.style.display = 'none';
         gameCreditsContent.style.animationDuration = '0s';
         audioCredits.pause();
-        btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
     });
-// selectCarColor.addEventListener('mouseover', ()=>audioMenuSelect.play());
-// selectCarColor.addEventListener('mouseup', ()=>audioMenuIn.play());
 
 
 ///PENDIENTE///
