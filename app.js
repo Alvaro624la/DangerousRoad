@@ -1,13 +1,9 @@
 const GAME = {
     personState: 'vivo',
-    // carColor: {
-    //     default: '',
-    //     green: 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)',
-    //     blue: 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)',
-    //     ugly: 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'
-    // },
     carColor: 'default',
-    homeMusic: 'mute'
+    homeMusic: 'mute',
+    points: 0,
+    highscore: 0
 };
 
 
@@ -68,8 +64,8 @@ let btnLeft = document.getElementById('leftBTN');
 let btnRight = document.getElementById('rightBTN');
 let btnDown = document.getElementById('downBTN');
 let scoreboard = document.getElementById('scoreboard');
-let points = 0;
-scoreboard.innerHTML = `Score: ${points}`;
+scoreboard.innerHTML = `Score: ${GAME.points}`;
+
 
 /// AUDIOS ///
 //home menu//
@@ -137,6 +133,7 @@ audioAmbient.preload = 'auto';
 audioAmbient.volume = 0.2;
 audioAmbient.src = './src/ambient.mp3';
 document.body.appendChild(audioAmbient);
+audioAmbient.setAttribute('loop', '');
 
 ///CAR///
 let zIndexNum = 1999999993;
@@ -180,11 +177,10 @@ audioStart.play();
 audioAmbient.play();
 
 function carLeftAppears(){
-    console.log(GAME.carColor);
     let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
-    /// change car color ///
+    /// set car color ///
     if(GAME.carColor == 'default'){
         car.style.filter = '';
     };
@@ -203,13 +199,13 @@ function carLeftAppears(){
     //Para no superponer nuevos coches y que se vean uno encima de otro (podré sacar 1.999.999.993 coches).
     zIndexNum--;
     car.style.animation = `car-left-animation ${carVelocitySec}s ease-in 1`;
-
     //cuando la persona está en el mismo carril del coche a su 79% del recorrido --> DEAD
     window.setTimeout(()=>{
         if(person.className == 'person-left'){
             //GAME OVER
             person.classList.add('person-dying-left');
 
+            audioAmbient.pause();
             audioGameOver.play();
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
             car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
@@ -233,8 +229,8 @@ function carLeftAppears(){
             });
             clearInterval(randomAppearsInterval);
             // mostrar resultado
-            points--;
-            scoreboard.innerHTML = `Score: ${points}`;
+            GAME.points--;
+            scoreboard.innerHTML = `Score: ${GAME.points}`;
             //mostrar pantalla final
             let gameOverModal = document.createElement('div');
             upContainer.appendChild(gameOverModal);
@@ -284,7 +280,7 @@ function carRightAppears(){
     let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
-    /// change car color ///
+    /// set car color ///
     if(GAME.carColor == 'default'){
         car.style.filter = '';
     };
@@ -308,6 +304,7 @@ function carRightAppears(){
             //GAME OVER
             person.classList.add('person-dying-right');
 
+            audioAmbient.pause();
             audioGameOver.play();
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
             car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
@@ -331,8 +328,8 @@ function carRightAppears(){
             });
             clearInterval(randomAppearsInterval);
             // mostrar resultado
-            points--;
-            scoreboard.innerHTML = `Score: ${points}`;
+            GAME.points--;
+            scoreboard.innerHTML = `Score: ${GAME.points}`;
             //mostrar pantalla final
             let gameOverModal = document.createElement('div');
             upContainer.appendChild(gameOverModal);
@@ -411,8 +408,8 @@ function arriba(){
 /// WIN POINTS ///
 function winPoint(){
     audioPoint.play();
-    points++;
-    scoreboard.innerHTML = `Score: ${points}`;
+    GAME.points++;
+    scoreboard.innerHTML = `Score: ${GAME.points}`;
     //cada vez que se gane un punto, restar numero de velocidad de aparicion de los coches. Un 1%;
     // carVelocitySec = carVelocitySec - (1*carVelocitySec)/100;
     // console.log(`carVelocitySec = ${carVelocitySec.toFixed(3)};`);
@@ -498,19 +495,20 @@ btnDown.addEventListener('mouseup', ()=>arriba());
 }; // startGame();
 
 /// HOME MENU ///
-
 // mute audioHomeMenu music //
-btnMute.addEventListener('click', (e)=>{
-    if(e.target.src == 'http://127.0.0.1:5500/src/mute.png'){
+function homeMusicMute(){
+    if(GAME.homeMusic == 'mute'){
+        GAME.homeMusic = 'unmute';
         btnMute.src = 'http://127.0.0.1:5500/src/unmute.png';
         audioHomeMenu.play();
-    } else if(e.target.src == 'http://127.0.0.1:5500/src/unmute.png'){
+    } else if(GAME.homeMusic == 'unmute'){
+        GAME.homeMusic = 'mute';
         btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
         audioHomeMenu.pause();
     };
-});
-//al iniciar --> mute
-btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
+};
+btnMute.addEventListener('click', homeMusicMute);
+
 
 //Autoplay policy in Chrome (Chrome's autoplay policies)
 //Al menos interactuar una vez en el documento (click, tap, etc.) para autoreproducir algun sonido:
