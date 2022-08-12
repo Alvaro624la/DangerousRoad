@@ -173,6 +173,10 @@ micImgContainer.addEventListener('mousedown', ()=>{
     };
 });
 
+//resaltar btn L R
+btnLeft.style.animation = 'resaltarL 1s linear';
+btnRight.style.animation = 'resaltarR 1s linear';
+
 audioStart.play();
 audioAmbient.play();
 
@@ -564,7 +568,8 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
-//realentizar minimo la mitad de la velocidad al darle a grabar al microfono para que de tiempo
+    //realentizar minimo la mitad de la velocidad al darle a grabar al microfono para que de tiempo
+    //
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz
