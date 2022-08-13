@@ -29,14 +29,19 @@ micImg.className = 'micOff';
 function rec(){
     recognition.start();
     micImg.className = 'micRecording';
+    ralentizar();
 };
 function stop(){
     recognition.stop();
     micImg.className = 'micOff';
+    acelerar();
 }
 //manejar errores al no reconocer la voz
 recognition.onerror = function(event) {
     console.log('Error durante el reconocimiento de voz: ' + event.error);
+    recognition.stop();
+    micImg.className = 'micOff';
+    acelerar();
 };
 
 /// VARIABLES ///
@@ -137,12 +142,60 @@ audioAmbient.setAttribute('loop', '');
 
 ///CAR///
 let zIndexNum = 1999999993;
-let carVelocitySec = 2;
+//velocidad en segundos de aparicion de coches
+let carVelocitySec = 2; 
 let carVelocityMSec = carVelocitySec*1000;
 //el 80% del carVelocitySec en MILISEGUNDOS//
 let carVelMSecpercentage = (80*carVelocityMSec)/100;
 //el 79% del carVelocitySec en MILISEGUNDOS//
 let crashMSecpercentage = (79*carVelocityMSec)/100;
+function ralentizar(){ 
+    if(micImg.className == 'micRecording'){
+        carVelocitySec += 3;
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+    }
+}
+function acelerar(){
+    carVelocitySec -= 3;
+    carVelocityMSec = carVelocitySec*1000;
+    carVelMSecpercentage = (80*carVelocityMSec)/100;
+    crashMSecpercentage = (79*carVelocityMSec)/100;
+}
+//aumentar dificultad a x nivel de puntos
+function addDificultyLevels(){
+    if(GAME.points >= 10 && GAME.points <= 15){
+        carVelocitySec -= 0.2;
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points > 15 && GAME.points <= 20){
+        carVelocitySec -= 0.3;
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points > 20 && GAME.points <= 25){
+        carVelocitySec -= 0.4;
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points > 25 && GAME.points <= 30){
+        carVelocitySec -= 0.3;
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    };;
+    console.log(carVelocitySec);
+};
 
 ///WALK///
 let topNumero = 55;
@@ -411,6 +464,7 @@ function arriba(){
 
 /// WIN POINTS ///
 function winPoint(){
+    addDificultyLevels();
     audioPoint.play();
     GAME.points++;
     scoreboard.innerHTML = `Score: ${GAME.points}`;
@@ -568,8 +622,6 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
-    //realentizar minimo la mitad de la velocidad al darle a grabar al microfono para que de tiempo
-    //
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz
