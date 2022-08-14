@@ -184,7 +184,7 @@ body{
                 border-radius: 0;
                 background-color: rgba(255, 255, 255, 0);
 
-                //activar con JS ('resaltarL 1s linear')
+                //activar con JS ('resaltarR 1s linear')
                 animation: '';
 
                 &::after{
@@ -218,6 +218,63 @@ body{
                 &:active{
                     background-color: rgb(138, 180, 134);
                     transform: scale(.95);
+                }
+            }
+        }
+        &__press-indicators{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            // z-index: 1999999994;
+
+            &__press-finger{
+                width: 100px;
+                position: absolute;
+                width: 20%;
+                top: 25%;
+                right: 10%;
+                display: none;
+
+            }
+            &__keyboard-l-cont{
+                position: absolute;
+                width: 12%;
+                bottom: 10%;
+                left: 10%;
+
+                &__key{
+                    width: 100%;
+                    border-radius: 6px;
+                    background: rgb(255, 255, 255);
+                    box-shadow: 0 5px rgb(255, 255, 255);
+                    transition: all 0.1s;
+                    opacity: 0;
+
+                    //activar con JS ('resaltarKeyL 1s linear')
+                    animation: '';
+                }
+            }
+            &__keyboard-r-cont{
+                position: absolute;
+                transform: rotateY(180deg);
+                width: 12%;
+                bottom: 10%;
+                right: 10%;
+
+                &__key{
+                    width: 100%;
+                    border-radius: 6px;
+                    background: rgb(255, 255, 255);
+                    box-shadow: 0 5px rgb(255, 255, 255);
+                    transition: all 0.1s;
+                    opacity: 0;
+
+                    //activar con JS ('resaltarKeyR 1s linear')
+                    animation: '';
+                    
+
                 }
             }
         }
@@ -406,6 +463,50 @@ body{
     }
     100%{
         background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+@keyframes resaltarKeyL {
+    0%{
+        opacity: 1;
+    }
+    25%{
+        transform: translateY(2px);
+        box-shadow: 0 3px rgb(60, 136, 45);
+        background: rgb(129, 202, 114);
+    }
+    50%{
+        background: rgb(255, 255, 255);
+        box-shadow: 0 5px rgb(255, 255, 255);
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes resaltarKeyR {
+    0%{
+        opacity: 1;
+    }
+    25%{
+        background: rgb(255, 255, 255);
+        box-shadow: 0 5px rgb(255, 255, 255);
+    }
+    50%{
+        transform: translateY(2px);
+        box-shadow: 0 3px rgb(60, 136, 45);
+        background: rgb(129, 202, 114);
+    }
+    75%{
+        background: rgb(255, 255, 255);
+        box-shadow: 0 5px rgb(255, 255, 255);
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
     }
 }
 @keyframes car-left-animation {

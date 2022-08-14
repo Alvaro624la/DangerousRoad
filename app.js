@@ -63,11 +63,15 @@ let homeMenuWindow = document.getElementById('homeMenu');
 let btnStart = document.getElementById('btnHomeMenuStart');
 let btnOptions = document.getElementById('btnHomeMenuOptions');
 
-let videoLoop = document.getElementById('road-loop');
-let person = document.getElementById('person');
 let btnLeft = document.getElementById('leftBTN');
 let btnRight = document.getElementById('rightBTN');
 let btnDown = document.getElementById('downBTN');
+let pressIndicatorKeyL = document.getElementById('pressIndicatorKeyL');
+let pressIndicatorKeyR = document.getElementById('pressIndicatorKeyR');
+let pressIndicatorFinger = document.getElementById('pressIndicatorFinger');
+
+let videoLoop = document.getElementById('road-loop');
+let person = document.getElementById('person');
 let scoreboard = document.getElementById('scoreboard');
 scoreboard.innerHTML = `Score: ${GAME.points}`;
 
@@ -226,15 +230,18 @@ micImgContainer.addEventListener('mousedown', ()=>{
     };
 });
 
-//resaltar btn L R
+//resaltar btn L R & keyboard L R & finger tapping
 btnLeft.style.animation = 'resaltarL 1s linear';
 btnRight.style.animation = 'resaltarR 1s linear';
+pressIndicatorKeyL.style.animation = 'resaltarKeyL 1s linear';
+pressIndicatorKeyR.style.animation = 'resaltarKeyR 1s linear';
+
 
 audioStart.play();
 audioAmbient.play();
 
 function carLeftAppears(){
-    let car = document.createElement("img");
+    // let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
     /// set car color ///
@@ -334,7 +341,7 @@ function carLeftAppears(){
     }, carVelocityMSec);
 };
 function carRightAppears(){
-    let car = document.createElement("img");
+    // let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
     /// set car color ///
@@ -622,6 +629,10 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
+//al comenzar el juego, cuando se iluminan los dos lados --> agregar FINGER img clickando para que se vea mejor y se entienda
+//guardar highscore y que salga de algun manera (usar localstorage por ejemplo)
+//cuando se quita el micro, aparecen 2 coches a la vez (el realentizado + el nuevo normal). Arreglarlo para que, por ejemplo, el realentizado se vuelva rapido a mitad de la calzada por ejemplo, eso seria ideal.
+//cambiar coches por otra cosa (zombies, motos...) tip: utilizar objeto: GAME.enemy: car/zombie/moto...etc
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz
