@@ -1,6 +1,7 @@
 const GAME = {
     personState: 'vivo',
     carColor: 'default',
+    vehicle: 'car',
     homeMusic: 'mute',
     points: 0,
     highscore: localStorage.getItem('highscore')
@@ -49,8 +50,8 @@ let btnMute = document.getElementById('btnMute');
 btnMute.alt = 'mute/unmute main music';
 
 let gameOptionsWindow = document.getElementById('gameOptionsWindow');
+let selectVehicle = document.getElementById('MenuHomeVehicle');
 let selectCarColor = document.getElementById('MenuHomeCarColor');
-let selectClima = document.getElementById('MenuHomeClima');
 let btnGameOptionsCancelar = document.getElementById('btnGameOptionsCancelar');
 let btnGameOptionsAceptar = document.getElementById('btnGameOptionsAceptar');
 
@@ -159,7 +160,7 @@ let carVelMSecpercentage = (80*carVelocityMSec)/100;
 //el 79% del carVelocitySec en MILISEGUNDOS//
 let crashMSecpercentage = (79*carVelocityMSec)/100;
 function ralentizar(){ 
-    if(micImg.className == 'micRecording'){
+    if(micImg.className === 'micRecording'){
         carVelocitySec += 3;
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
@@ -174,99 +175,93 @@ function acelerar(){
 }
 //aumentar dificultad a x nivel de puntos
 function addDificultyLevels(){
-    if(GAME.points == 10){
+    if(GAME.points === 10){
         carVelocitySec -= 0.2; // 1.8
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 15){
+    } else if (GAME.points === 15){
         carVelocitySec -= 0.3; // 1.5
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 20){
+    } else if (GAME.points === 20){
         carVelocitySec -= 0.4; // 1.1
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 25){
+    } else if (GAME.points === 25){
         carVelocitySec -= 0.1; // 1
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 30){
+    } else if (GAME.points === 30){
         carVelocitySec -= 0.1; // 0.9
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 35){
+    } else if (GAME.points === 35){
         carVelocitySec -= 0.1; // 0.8
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 40){
+    } else if (GAME.points === 40){
         carVelocitySec -= 0.1; // 0.7
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points == 45){
+    } else if (GAME.points === 45){
         carVelocitySec -= 0.1; // 0.6
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
     
-    } else if (GAME.points == 50){
+    } else if (GAME.points === 50){
         carVelocitySec -= 0.1; // 0.5
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
     
-    } else if (GAME.points == 55){
+    } else if (GAME.points === 55){
         carVelocitySec -= 0.1; // 0.4
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
     
-    } else if (GAME.points == 60){
+    } else if (GAME.points === 60){
         carVelocitySec -= 0.1; // 0.3
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
     
-    } else if (GAME.points == 65){
+    } else if (GAME.points === 65){
         carVelocitySec -= 0.1; // 0.2
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
     
-    } else if (GAME.points == 70){
+    } else if (GAME.points === 70){
         carVelocitySec -= 0.1; // 0.1
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
     
     };
-    console.log(carVelocitySec);
+    console.log(`${carVelocitySec}s`);
 };
 
 ///WALK///
@@ -277,7 +272,7 @@ person.style.top = `${topNumero}%`;
 
 function startGame(){
 /// clima ///
-// if(selectClima.value == 'clima-fog'){
+// if(selectClima.value === 'clima-fog'){
 //     upContainer.style.filter = 'invert(80%) sepia(0%) saturate(9%) hue-rotate(187deg) brightness(89%) contrast(82%)';
 // } else {upContainer.style.filter = ''}
 //////////// FUNCTIONS ////////////
@@ -290,10 +285,10 @@ homeMenuWindow.style.display = 'none';
 
 /// MIC EVENTLISTENER ///
 micImgContainer.addEventListener('mousedown', ()=>{
-    if(micImg.className == 'micRecording'){
+    if(micImg.className === 'micRecording'){
         stop();
     }
-    else if(micImg.className == 'micOff'){
+    else if(micImg.className === 'micOff'){
         rec(); 
     };
 });
@@ -311,19 +306,24 @@ audioAmbient.play();
 
 function carLeftAppears(){
     let car = document.createElement("img");
-    car.src = './src/car1.png';
+    if(GAME.vehicle === 'car'){
+        car.src = './src/car1.png';
+    };
+    if(GAME.vehicle === 'motorcycle'){
+        car.src = './src/motoL.png';
+    };
     upContainer.appendChild(car);
     /// set car color ///
-    if(GAME.carColor == 'default'){
+    if(GAME.carColor === 'default'){
         car.style.filter = '';
     };
-    if(GAME.carColor == 'green'){
+    if(GAME.carColor === 'green'){
         car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
     };
-    if(GAME.carColor == 'blue'){
+    if(GAME.carColor === 'blue'){
         car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
     };
-    if(GAME.carColor == 'ugly-1'){
+    if(GAME.carColor === 'ugly-1'){
         car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
     };
     ///car CSS///
@@ -334,7 +334,7 @@ function carLeftAppears(){
     car.style.animation = `car-left-animation ${carVelocitySec}s ease-in 1`;
     //cuando la persona está en el mismo carril del coche a su 79% del recorrido --> DEAD
     window.setTimeout(()=>{
-        if(person.className == 'person-left'){
+        if(person.className === 'person-left'){
             //GAME OVER
             person.classList.add('person-dying-left');
 
@@ -353,10 +353,10 @@ function carLeftAppears(){
             window.removeEventListener('keyup', keyUp);
             window.removeEventListener('keydown', keyDown);
             micImgContainer.addEventListener('mousedown', ()=>{
-                if(micImg.className == 'micRecording'){
+                if(micImg.className === 'micRecording'){
                     stop();
                 }
-                else if(micImg.className == 'micOff'){
+                else if(micImg.className === 'micOff'){
                     rec(); 
                 };
             });
@@ -415,19 +415,24 @@ function carLeftAppears(){
 };
 function carRightAppears(){
     let car = document.createElement("img");
-    car.src = './src/car1.png';
+    if(GAME.vehicle === 'car'){
+        car.src = './src/car1.png';
+    };
+    if(GAME.vehicle === 'motorcycle'){
+        car.src = './src/motoR.png';
+    };
     upContainer.appendChild(car);
     /// set car color ///
-    if(GAME.carColor == 'default'){
+    if(GAME.carColor === 'default'){
         car.style.filter = '';
     };
-    if(GAME.carColor == 'green'){
+    if(GAME.carColor === 'green'){
         car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
     };
-    if(GAME.carColor == 'blue'){
+    if(GAME.carColor === 'blue'){
         car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
     };
-    if(GAME.carColor == 'ugly-1'){
+    if(GAME.carColor === 'ugly-1'){
         car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
     };
     ///car CSS///
@@ -437,7 +442,7 @@ function carRightAppears(){
     car.style.animation = `car-right-animation ${carVelocitySec}s ease-in 1`;
 
     window.setTimeout(()=>{
-        if(person.className == 'person-right'){
+        if(person.className === 'person-right'){
             //GAME OVER
             person.classList.add('person-dying-right');
 
@@ -456,10 +461,10 @@ function carRightAppears(){
             window.removeEventListener('keyup', keyUp);
             window.removeEventListener('keydown', keyDown);
             micImgContainer.addEventListener('mousedown', ()=>{
-                if(micImg.className == 'micRecording'){
+                if(micImg.className === 'micRecording'){
                     stop();
                 }
-                else if(micImg.className == 'micOff'){
+                else if(micImg.className === 'micOff'){
                     rec(); 
                 };
             });
@@ -522,10 +527,10 @@ let randomAppearsInterval = window.setInterval(randomAppears, carVelocityMSec);
 /// WALK ///
 function walk(){
     //arriba
-    if(topNumero == 55){
+    if(topNumero === 55){
         topNumero = 56;
     }
-    else if(topNumero == 56){
+    else if(topNumero === 56){
         topNumero--;
     }
     //abajo
@@ -551,6 +556,7 @@ function winPoint(){
     addDificultyLevels();
     audioPoint.play();
     GAME.points++;
+    console.log(`You've scored ${GAME.points} points!`);
     scoreboard.innerHTML = `Score: ${GAME.points}`;
     //cada vez que se gane un punto, restar numero de velocidad de aparicion de los coches. Un 1%;
     // carVelocitySec = carVelocitySec - (1*carVelocitySec)/100;
@@ -639,13 +645,13 @@ btnDown.addEventListener('mouseup', ()=>arriba());
 /// HOME MENU ///
 // mute audioHomeMenu music //
 function homeMusicMute(){
-    if(GAME.homeMusic == 'mute'){
+    if(GAME.homeMusic === 'mute'){
         GAME.homeMusic = 'unmute';
-        btnMute.src = 'http://127.0.0.1:5500/src/unmute.png';
+        btnMute.src = './src/unmute.png';
         audioHomeMenu.play();
-    } else if(GAME.homeMusic == 'unmute'){
+    } else if(GAME.homeMusic === 'unmute'){
         GAME.homeMusic = 'mute';
-        btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
+        btnMute.src = './src/mute.png';
         audioHomeMenu.pause();
     };
 };
@@ -667,7 +673,7 @@ function autoplayHomeBtnsAllowed(){
 btnStart.addEventListener('mouseup', ()=>{
     audioMenuIn.play();
     audioHomeMenu.pause();
-    btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
+    btnMute.src = './src/mute.png';
     startGame();
 });
 btnOptions.addEventListener('mouseup', ()=>{
@@ -676,18 +682,20 @@ btnOptions.addEventListener('mouseup', ()=>{
     btnGameOptionsCancelar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsCancelar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsCancelar.addEventListener('mouseup', ()=>{
+        selectVehicle.value = GAME.vehicle;
         selectCarColor.value = GAME.carColor;
         gameOptionsWindow.style.display = 'none';
     });
     btnGameOptionsAceptar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsAceptar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsAceptar.addEventListener('mouseup', ()=>{
+        GAME.vehicle = selectVehicle.value;
         GAME.carColor = selectCarColor.value;
         gameOptionsWindow.style.display = 'none';
     });
 btnCredits.addEventListener('mouseup', ()=>{
     audioHomeMenu.pause();
-    btnMute.src = 'http://127.0.0.1:5500/src/mute.png';
+    btnMute.src = './src/mute.png';
     audioCredits.play();
     gameCreditsContent.style.animationDuration = '17s';
     gameCreditsWindow.style.display = 'block';
@@ -706,8 +714,10 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
-//cuando se quita el micro, aparecen 2 coches a la vez (el realentizado + el nuevo normal). Arreglarlo para que, por ejemplo, el realentizado se vuelva rapido a mitad de la calzada por ejemplo, eso seria ideal.
-//cambiar coches por otra cosa (zombies, motos...) tip: utilizar objeto: GAME.enemy: car/zombie/moto...etc
+//guardar opciones para no tener que marcarlas en cada nueva partida
+//solucionar problema: cuando se quita el micro, aparecen 2 coches a la vez (el realentizado + el nuevo normal). Arreglarlo para que, por ejemplo, el realentizado se vuelva rapido a mitad de la calzada por ejemplo, eso seria ideal.
+//idea: añadir DIFICULTAD a opciones (+ dificultad = +rapidez coches)
+//idea: añadir alias y guardar usuarios ranking con localStorage (pero igual localstorage no es suficiente porque se borra fácil). Pues BBDD...
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz

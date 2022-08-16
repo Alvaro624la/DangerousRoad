@@ -46,11 +46,22 @@
             <section id="gameOptionsWindow" class="main__article__gameOptionsWindow">
                 <div id="gameOptions" class="main__article__gameOptionsWindow__content">
                     <div class="main__article__gameOptionsWindow__content__div1">
-                        <label class="main__article__gameOptionsWindow__content__div1__label">Select car color</label>
-                        <div id="MenuHomeCarColorContCarColor" class="main__article__gameOptionsWindow__content__div1__div1">
+                        <label class="main__article__gameOptionsWindow__content__div1__label">Select the vehicle</label>
+                        <div id="MenuHomeCarColorContClima" class="main__article__gameOptionsWindow__content__div1__div1">
+                            <select 
+                            onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+                            id="MenuHomeVehicle" class="main__article__gameOptionsWindow__content__div1__div1__select" name="MenuHomeVehicle">
+                                <option label="Car" value="car" selected value></option>
+                                <option label="Motorcycle" value="motorcycle"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="main__article__gameOptionsWindow__content__div2">
+                        <label class="main__article__gameOptionsWindow__content__div2__label">Select car color</label>
+                        <div id="MenuHomeCarColorContCarColor" class="main__article__gameOptionsWindow__content__div2__div1">
                             <select 
                             onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
-                            id="MenuHomeCarColor" class="main__article__gameOptionsWindow__content__div1__div1__select" name="MenuHomeCarColor">
+                            id="MenuHomeCarColor" class="main__article__gameOptionsWindow__content__div2__div1__select" name="MenuHomeCarColor">
                                 <option label="Default" value="default"></option>
                                 <option label="Green" value="green"></option>
                                 <option label="Blue" value="blue"></option>
@@ -58,17 +69,6 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="main__article__gameOptionsWindow__content__div2">
-                        <label class="main__article__gameOptionsWindow__content__div2__label">Select environmental conditions</label>
-                        <div id="MenuHomeCarColorContClima" class="main__article__gameOptionsWindow__content__div2__div1">
-                            <select 
-                            onfocus='this.size=2;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
-                            id="MenuHomeClima" class="main__article__gameOptionsWindow__content__div2__div1__select" name="MenuHomeCarColor">
-                                <option label="Default" value="clima-default" selected value></option>
-                                <option label="Fog" value="clima-fog"></option>
-                            </select>
-                        </div>
-                    </div> -->
                 </div>
                 <div id="optionsCancelarAceptarCont" class="main__article__gameOptionsWindow__btns-container">
                     <a id="btnGameOptionsCancelar" class="main__article__gameOptionsWindow__btns-container__cancel">Cancelar</a>
