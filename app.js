@@ -174,35 +174,98 @@ function acelerar(){
 }
 //aumentar dificultad a x nivel de puntos
 function addDificultyLevels(){
-    if(GAME.points >= 10 && GAME.points <= 15){
-        carVelocitySec -= 0.2;
+    if(GAME.points == 10){
+        carVelocitySec -= 0.2; // 1.8
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points > 15 && GAME.points <= 20){
-        carVelocitySec -= 0.3;
+    } else if (GAME.points == 15){
+        carVelocitySec -= 0.3; // 1.5
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points > 20 && GAME.points <= 25){
-        carVelocitySec -= 0.4;
+    } else if (GAME.points == 20){
+        carVelocitySec -= 0.4; // 1.1
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    } else if (GAME.points > 25 && GAME.points <= 30){
-        carVelocitySec -= 0.3;
+    } else if (GAME.points == 25){
+        carVelocitySec -= 0.1; // 1
         carVelocityMSec = carVelocitySec*1000;
         carVelMSecpercentage = (80*carVelocityMSec)/100;
         crashMSecpercentage = (79*carVelocityMSec)/100;
         console.log(carVelocitySec);
     
-    };;
+    } else if (GAME.points == 30){
+        carVelocitySec -= 0.1; // 0.9
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 35){
+        carVelocitySec -= 0.1; // 0.8
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 40){
+        carVelocitySec -= 0.1; // 0.7
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 45){
+        carVelocitySec -= 0.1; // 0.6
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 50){
+        carVelocitySec -= 0.1; // 0.5
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 55){
+        carVelocitySec -= 0.1; // 0.4
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 60){
+        carVelocitySec -= 0.1; // 0.3
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 65){
+        carVelocitySec -= 0.1; // 0.2
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    } else if (GAME.points == 70){
+        carVelocitySec -= 0.1; // 0.1
+        carVelocityMSec = carVelocitySec*1000;
+        carVelMSecpercentage = (80*carVelocityMSec)/100;
+        crashMSecpercentage = (79*carVelocityMSec)/100;
+        console.log(carVelocitySec);
+    
+    };
     console.log(carVelocitySec);
 };
 
