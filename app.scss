@@ -157,6 +157,7 @@ body{
             grid-template: auto / 1fr 1fr;
 
             &__left{
+                z-index: 1999999994;
                 cursor: pointer;
                 border: 0;
                 border-radius: 0;
@@ -179,6 +180,7 @@ body{
                 }
             }
             &__right{
+                z-index: 1999999994;
                 cursor: pointer;
                 border: 0;
                 border-radius: 0;
@@ -227,16 +229,17 @@ body{
             left: 0;
             width: 100%;
             height: 100%;
-            // z-index: 1999999994;
 
             &__press-finger{
-                width: 100px;
                 position: absolute;
                 width: 20%;
                 top: 25%;
-                right: 10%;
-                display: none;
+                right: 75%;
+                transform: translate(50%, 0);
+                opacity: 0;
 
+                //activar con JS ('resaltarFinger 1s linear')
+                animation: '';
             }
             &__keyboard-l-cont{
                 position: absolute;
@@ -404,11 +407,11 @@ body{
             }
         }
     }
-    &__scoreboard-container{
+    &__scoreboards-container{
         position: relative;
         height: 100%;
 
-        &__content{
+        &__scoreboard{
             position: absolute;
             top: 0;
             left: 50%;
@@ -418,6 +421,21 @@ body{
             height: auto;
             color: #fff;
             font-size: 2em;
+            font-family: 'Bangers', cursive, Helvetica, Arial;
+            letter-spacing: 1.5px;
+            padding: .2em;
+        }
+        &__highscoreboard{
+            position: absolute;
+            top: 0;
+            margin-top: 2.5em;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 1999999996;
+            width: auto;
+            height: auto;
+            color: rgb(255, 232, 170);
+            font-size: 1em;
             font-family: 'Bangers', cursive, Helvetica, Arial;
             letter-spacing: 1.5px;
             padding: .2em;
@@ -465,16 +483,55 @@ body{
         background-color: rgba(255, 255, 255, 0.2);
     }
 }
+@keyframes resaltarFinger {
+    0%{
+        opacity: 1;
+    }
+    15%{
+        width: 20%;
+        right: 75%;
+    }
+    25%{
+        width: 18%;
+    }
+    35%{
+        width: 20%;
+        right: 75%;
+    }
+    60%{
+        width: 20%;
+        right: 25%;
+    }
+    75%{
+        width: 18%;
+    }
+    80%{
+        width: 20%;
+        right: 25%;
+
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        right: 25%;
+    }
+}
 @keyframes resaltarKeyL {
     0%{
         opacity: 1;
+    }
+    15%{
+        transform: translateY(0px);
+        background: rgb(255, 255, 255);
+        box-shadow: 0 5px rgb(255, 255, 255);
     }
     25%{
         transform: translateY(2px);
         box-shadow: 0 3px rgb(60, 136, 45);
         background: rgb(129, 202, 114);
     }
-    50%{
+    35%{
+        transform: translateY(0px);
         background: rgb(255, 255, 255);
         box-shadow: 0 5px rgb(255, 255, 255);
     }
@@ -489,20 +546,20 @@ body{
     0%{
         opacity: 1;
     }
-    25%{
+    65%{
+        transform: translateY(0px);
         background: rgb(255, 255, 255);
         box-shadow: 0 5px rgb(255, 255, 255);
     }
-    50%{
+    75%{
         transform: translateY(2px);
         box-shadow: 0 3px rgb(60, 136, 45);
         background: rgb(129, 202, 114);
     }
-    75%{
+    85%{
+        transform: translateY(0px);
         background: rgb(255, 255, 255);
         box-shadow: 0 5px rgb(255, 255, 255);
-    }
-    80%{
         opacity: 1;
     }
     100%{

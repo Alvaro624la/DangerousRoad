@@ -3,7 +3,7 @@ const GAME = {
     carColor: 'default',
     homeMusic: 'mute',
     points: 0,
-    highscore: 0
+    highscore: localStorage.getItem('highscore')
 };
 
 
@@ -73,7 +73,12 @@ let pressIndicatorFinger = document.getElementById('pressIndicatorFinger');
 let videoLoop = document.getElementById('road-loop');
 let person = document.getElementById('person');
 let scoreboard = document.getElementById('scoreboard');
+let highscoreboard = document.getElementById('highscoreboard');
+//al cargar la pagina
 scoreboard.innerHTML = `Score: ${GAME.points}`;
+if(GAME.highscore !== null) highscoreboard.innerHTML = `Highscore: ${GAME.highscore}`
+else highscoreboard.innerHTML = `Highscore: 0`;
+
 
 
 /// AUDIOS ///
@@ -235,13 +240,14 @@ btnLeft.style.animation = 'resaltarL 1s linear';
 btnRight.style.animation = 'resaltarR 1s linear';
 pressIndicatorKeyL.style.animation = 'resaltarKeyL 1s linear';
 pressIndicatorKeyR.style.animation = 'resaltarKeyR 1s linear';
+pressIndicatorFinger.style.animation = 'resaltarFinger 1s linear';
 
 
 audioStart.play();
 audioAmbient.play();
 
 function carLeftAppears(){
-    // let car = document.createElement("img");
+    let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
     /// set car color ///
@@ -292,6 +298,10 @@ function carLeftAppears(){
                 };
             });
             clearInterval(randomAppearsInterval);
+            //guardar highscore
+            localStorage.setItem('highscore', GAME.points);
+            GAME.highscore = localStorage.getItem('highscore');
+            highscoreboard.innerHTML = `Highscore: ${GAME.highscore}`;
             // mostrar resultado
             GAME.points--;
             scoreboard.innerHTML = `Score: ${GAME.points}`;
@@ -341,7 +351,7 @@ function carLeftAppears(){
     }, carVelocityMSec);
 };
 function carRightAppears(){
-    // let car = document.createElement("img");
+    let car = document.createElement("img");
     car.src = './src/car1.png';
     upContainer.appendChild(car);
     /// set car color ///
@@ -391,6 +401,10 @@ function carRightAppears(){
                 };
             });
             clearInterval(randomAppearsInterval);
+            //guardar highscore
+            localStorage.setItem('highscore', GAME.points);
+            GAME.highscore = localStorage.getItem('highscore');
+            highscoreboard.innerHTML = `Highscore: ${GAME.highscore}`;
             // mostrar resultado
             GAME.points--;
             scoreboard.innerHTML = `Score: ${GAME.points}`;
@@ -629,8 +643,6 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
-//al comenzar el juego, cuando se iluminan los dos lados --> agregar FINGER img clickando para que se vea mejor y se entienda
-//guardar highscore y que salga de algun manera (usar localstorage por ejemplo)
 //cuando se quita el micro, aparecen 2 coches a la vez (el realentizado + el nuevo normal). Arreglarlo para que, por ejemplo, el realentizado se vuelva rapido a mitad de la calzada por ejemplo, eso seria ideal.
 //cambiar coches por otra cosa (zombies, motos...) tip: utilizar objeto: GAME.enemy: car/zombie/moto...etc
 
