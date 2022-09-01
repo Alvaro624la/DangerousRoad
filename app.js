@@ -1,7 +1,7 @@
 const GAME = {
     personState: 'vivo',
-    carColor: 'default',
     vehicle: 'car',
+    vehicleColor: 'Default', //misma palabra que ...Default....png las imagenes. Importante.
     homeMusic: 'mute',
     points: 0,
     highscore: localStorage.getItem('highscore')
@@ -153,115 +153,121 @@ audioAmbient.setAttribute('loop', '');
 ///CAR///
 let zIndexNum = 1999999993;
 //velocidad en segundos de aparicion de coches
-let carVelocitySec = 2; 
-let carVelocityMSec = carVelocitySec*1000;
-//el 80% del carVelocitySec en MILISEGUNDOS//
-let carVelMSecpercentage = (80*carVelocityMSec)/100;
-//el 79% del carVelocitySec en MILISEGUNDOS//
-let crashMSecpercentage = (79*carVelocityMSec)/100;
+let vehicleVelocitySec = 2; 
+let vehicleVelocityMSec = vehicleVelocitySec*1000;
+//el 80% del vehicleVelocitySec en MILISEGUNDOS//
+let vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+//el 79% del vehicleVelocitySec en MILISEGUNDOS//
+let crashMSecpercentage = (79*vehicleVelocityMSec)/100;
 function ralentizar(){ 
     if(micImg.className === 'micRecording'){
-        carVelocitySec += 3;
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec += 3;
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
     }
 }
 function acelerar(){
-    carVelocitySec -= 3;
-    carVelocityMSec = carVelocitySec*1000;
-    carVelMSecpercentage = (80*carVelocityMSec)/100;
-    crashMSecpercentage = (79*carVelocityMSec)/100;
+    vehicleVelocitySec -= 3;
+    vehicleVelocityMSec = vehicleVelocitySec*1000;
+    vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+    crashMSecpercentage = (79*vehicleVelocityMSec)/100;
 }
 //aumentar dificultad a x nivel de puntos
 function addDificultyLevels(){
     if(GAME.points === 10){
-        carVelocitySec -= 0.2; // 1.8
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.2; // 1.8
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 15){
-        carVelocitySec -= 0.3; // 1.5
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.3; // 1.5
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 20){
-        carVelocitySec -= 0.4; // 1.1
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.4; // 1.1
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 25){
-        carVelocitySec -= 0.1; // 1
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.1; // 1
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 30){
-        carVelocitySec -= 0.1; // 0.9
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.1; // 0.9
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 35){
-        carVelocitySec -= 0.1; // 0.8
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.1; // 0.8
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 40){
-        carVelocitySec -= 0.1; // 0.7
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
-        console.log(carVelocitySec);
+        vehicleVelocitySec -= 0.1; // 0.7
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 45){
-        carVelocitySec -= 0.1; // 0.6
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec -= 0.1; // 0.6
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 50){
-        carVelocitySec -= 0.1; // 0.5
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec -= 0.1; // 0.5
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 55){
-        carVelocitySec -= 0.1; // 0.4
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec -= 0.1; // 0.4
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 60){
-        carVelocitySec -= 0.1; // 0.3
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec -= 0.1; // 0.3
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 65){
-        carVelocitySec -= 0.1; // 0.2
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec -= 0.1; // 0.2
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     } else if (GAME.points === 70){
-        carVelocitySec -= 0.1; // 0.1
-        carVelocityMSec = carVelocitySec*1000;
-        carVelMSecpercentage = (80*carVelocityMSec)/100;
-        crashMSecpercentage = (79*carVelocityMSec)/100;
+        vehicleVelocitySec -= 0.1; // 0.1
+        vehicleVelocityMSec = vehicleVelocitySec*1000;
+        vehicleVelMSecpercentage = (80*vehicleVelocityMSec)/100;
+        crashMSecpercentage = (79*vehicleVelocityMSec)/100;
+        console.log(vehicleVelocitySec);
     
     };
-    console.log(`${carVelocitySec}s`);
+    console.log(`${vehicleVelocitySec}s`);
 };
 
 ///WALK///
@@ -304,34 +310,22 @@ pressIndicatorFinger.style.animation = 'resaltarFinger 1s linear';
 audioStart.play();
 audioAmbient.play();
 
-function carLeftAppears(){
-    let car = document.createElement("img");
+function vehicleLeftAppears(){
+    let vehicle = document.createElement("img");
+    /// set vehicle type and vehicle color ///
     if(GAME.vehicle === 'car'){
-        car.src = './src/car1.png';
+        vehicle.src = `./src/car${GAME.vehicleColor}.png`;
     };
     if(GAME.vehicle === 'motorcycle'){
-        car.src = './src/motoL.png';
+        vehicle.src = `./src/motoDefaultL.png`;
     };
-    upContainer.appendChild(car);
-    /// set car color ///
-    if(GAME.carColor === 'default'){
-        car.style.filter = '';
-    };
-    if(GAME.carColor === 'green'){
-        car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
-    };
-    if(GAME.carColor === 'blue'){
-        car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
-    };
-    if(GAME.carColor === 'ugly-1'){
-        car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
-    };
-    ///car CSS///
-    car.style.position = 'absolute';
-    car.style.zIndex = zIndexNum;
+    upContainer.appendChild(vehicle);
+    ///vehicle CSS///
+    vehicle.style.position = 'absolute';
+    vehicle.style.zIndex = zIndexNum;
     //Para no superponer nuevos coches y que se vean uno encima de otro (podré sacar 1.999.999.993 coches).
     zIndexNum--;
-    car.style.animation = `car-left-animation ${carVelocitySec}s ease-in 1`;
+    vehicle.style.animation = `car-left-animation ${vehicleVelocitySec}s ease-in 1`;
     //cuando la persona está en el mismo carril del coche a su 79% del recorrido --> DEAD
     window.setTimeout(()=>{
         if(person.className === 'person-left'){
@@ -341,8 +335,8 @@ function carLeftAppears(){
             audioAmbient.pause();
             audioGameOver.play();
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            car.parentElement.removeChild(car);
+            vehicle.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
+            vehicle.parentElement.removeChild(vehicle);
             videoLoop.removeAttribute('loop');
             videoLoop.removeAttribute('autoplay');
             // parar todo
@@ -399,47 +393,35 @@ function carLeftAppears(){
     //cuando los coches pasen el 80% del recorrido:
     window.setTimeout(()=>{
         //cambiar color coche a verde
-        car.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
+        vehicle.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
         //cambiar z-index para pasar el coche sobre la persona
-        car.style.zIndex = 1999999995;
+        vehicle.style.zIndex = 1999999995;
         winPoint();
-    }, carVelMSecpercentage);
+    }, vehicleVelMSecpercentage);
     //eliminar nodo de coche
     window.setTimeout(()=>{
         //este try catch es provisional hasta que vea como solucionar el --> cuando GAME OVER, eliminar todo lo de despues, incluida ésta función.
         try{
-            car.parentElement.removeChild(car);
+            vehicle.parentElement.removeChild(vehicle);
         }
         catch (err) {console.log(err)};
-    }, carVelocityMSec);
+    }, vehicleVelocityMSec);
 };
-function carRightAppears(){
-    let car = document.createElement("img");
+function vehicleRightAppears(){
+    let vehicle = document.createElement("img");
+    /// set vehicle type and vehicle color ///
     if(GAME.vehicle === 'car'){
-        car.src = './src/car1.png';
+        vehicle.src = `./src/car${GAME.vehicleColor}.png`;
     };
     if(GAME.vehicle === 'motorcycle'){
-        car.src = './src/motoR.png';
+        vehicle.src = `./src/motoDefaultL.png`;
     };
-    upContainer.appendChild(car);
-    /// set car color ///
-    if(GAME.carColor === 'default'){
-        car.style.filter = '';
-    };
-    if(GAME.carColor === 'green'){
-        car.style.filter = 'invert(80%) sepia(84%) saturate(3735%) hue-rotate(54deg) brightness(128%) contrast(86%)'; // #5e5
-    };
-    if(GAME.carColor === 'blue'){
-        car.style.filter = 'invert(35%) sepia(48%) saturate(2148%) hue-rotate(217deg) brightness(102%) contrast(104%)'; // #56f
-    };
-    if(GAME.carColor === 'ugly-1'){
-        car.style.filter = 'invert(82%) sepia(19%) saturate(2423%) hue-rotate(212deg) brightness(103%) contrast(105%)'; // #faf
-    };
-    ///car CSS///
-    car.style.position = 'absolute';
-    car.style.zIndex = zIndexNum;
+    upContainer.appendChild(vehicle);
+    ///vehicle CSS///
+    vehicle.style.position = 'absolute';
+    vehicle.style.zIndex = zIndexNum;
     zIndexNum--;
-    car.style.animation = `car-right-animation ${carVelocitySec}s ease-in 1`;
+    vehicle.style.animation = `car-right-animation ${vehicleVelocitySec}s ease-in 1`;
 
     window.setTimeout(()=>{
         if(person.className === 'person-right'){
@@ -449,8 +431,8 @@ function carRightAppears(){
             audioAmbient.pause();
             audioGameOver.play();
             person.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            car.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
-            car.parentElement.removeChild(car);
+            vehicle.style.filter = 'invert(34%) sepia(53%) saturate(1904%) hue-rotate(334deg) brightness(96%) contrast(84%)';
+            vehicle.parentElement.removeChild(vehicle);
             videoLoop.removeAttribute('loop');
             videoLoop.removeAttribute('autoplay');
             // parar todo
@@ -503,26 +485,26 @@ function carRightAppears(){
         };
     }, crashMSecpercentage);
         window.setTimeout(()=>{
-            car.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
-            car.style.zIndex = 1999999995;
+            vehicle.style.filter = 'invert(74%) sepia(85%) saturate(347%) hue-rotate(60deg) brightness(95%) contrast(95%)';
+            vehicle.style.zIndex = 1999999995;
             winPoint();
-        }, carVelMSecpercentage);
+        }, vehicleVelMSecpercentage);
         window.setTimeout(()=>{
             try{
-                car.parentElement.removeChild(car);
+                vehicle.parentElement.removeChild(vehicle);
             }
             catch (err) {console.log(err)};
-        }, carVelocityMSec);
+        }, vehicleVelocityMSec);
 };
 ///CARS APPEARS
 function randomAppears(){
     //numero random del 0 al 9
     let randomNum = Math.random()*10;
-    if(randomNum < 4.5){carLeftAppears()}
-    if(randomNum > 4.5){carRightAppears()}
+    if(randomNum < 4.5){vehicleLeftAppears()}
+    if(randomNum > 4.5){vehicleRightAppears()}
     console.warn(`Clue: Car L/R appears --> ${randomNum.toFixed(1)}`);
 }
-let randomAppearsInterval = window.setInterval(randomAppears, carVelocityMSec);
+let randomAppearsInterval = window.setInterval(randomAppears, vehicleVelocityMSec);
 
 /// WALK ///
 function walk(){
@@ -559,8 +541,8 @@ function winPoint(){
     console.log(`You've scored ${GAME.points} points!`);
     scoreboard.innerHTML = `Score: ${GAME.points}`;
     //cada vez que se gane un punto, restar numero de velocidad de aparicion de los coches. Un 1%;
-    // carVelocitySec = carVelocitySec - (1*carVelocitySec)/100;
-    // console.log(`carVelocitySec = ${carVelocitySec.toFixed(3)};`);
+    // vehicleVelocitySec = vehicleVelocitySec - (1*vehicleVelocitySec)/100;
+    // console.log(`vehicleVelocitySec = ${vehicleVelocitySec.toFixed(3)};`);
     //PROBLEMA CON ASINCRONIA DEL INTERVALO PARA CAMBIAR VARIABLE Y QUE AFECTE
 };
 
@@ -676,6 +658,14 @@ btnStart.addEventListener('mouseup', ()=>{
     btnMute.src = './src/mute.png';
     startGame();
 });
+//cuando seleccione motorcycle, no mostrar opcion de colores para coches
+gameOptionsWindow.addEventListener('mouseup', ()=>{
+    if(selectVehicle.value === 'motorcycle'){
+        selectCarColorDiv.style.display = 'none';
+    } else {
+        selectCarColorDiv.style.display = 'flex';
+    }
+});
 btnOptions.addEventListener('mouseup', ()=>{
     gameOptionsWindow.style.display = 'block';
 });
@@ -683,14 +673,14 @@ btnOptions.addEventListener('mouseup', ()=>{
     btnGameOptionsCancelar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsCancelar.addEventListener('mouseup', ()=>{
         selectVehicle.value = GAME.vehicle;
-        selectCarColor.value = GAME.carColor;
+        selectCarColor.value = GAME.vehicleColor;
         gameOptionsWindow.style.display = 'none';
     });
     btnGameOptionsAceptar.addEventListener('mouseover', ()=>audioMenuSelect.play());
     btnGameOptionsAceptar.addEventListener('mousedown', ()=>audioMenuOut.play());
     btnGameOptionsAceptar.addEventListener('mouseup', ()=>{
         GAME.vehicle = selectVehicle.value;
-        GAME.carColor = selectCarColor.value;
+        GAME.vehicleColor = selectCarColor.value;
         gameOptionsWindow.style.display = 'none';
     });
 btnCredits.addEventListener('mouseup', ()=>{
@@ -714,6 +704,7 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
+//version random todos los vehiculos aparecen aleatoriamente
 //guardar opciones para no tener que marcarlas en cada nueva partida
 //solucionar problema: cuando se quita el micro, aparecen 2 coches a la vez (el realentizado + el nuevo normal). Arreglarlo para que, por ejemplo, el realentizado se vuelva rapido a mitad de la calzada por ejemplo, eso seria ideal.
 //idea: añadir DIFICULTAD a opciones (+ dificultad = +rapidez coches)
@@ -721,3 +712,4 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz
+
