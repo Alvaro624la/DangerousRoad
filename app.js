@@ -414,7 +414,7 @@ function vehicleRightAppears(){
         vehicle.src = `./src/car${GAME.vehicleColor}.png`;
     };
     if(GAME.vehicle === 'motorcycle'){
-        vehicle.src = `./src/motoDefaultL.png`;
+        vehicle.src = `./src/motoDefaultR.png`;
     };
     upContainer.appendChild(vehicle);
     ///vehicle CSS///
