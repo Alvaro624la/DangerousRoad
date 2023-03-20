@@ -711,6 +711,8 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 
 ///PENDIENTE///
+//arreglar CSS ver pantalla completa en todos los dispositivos
+//añadir boton de pausa
 //version random todos los vehiculos aparecen aleatoriamente
 //guardar opciones para no tener que marcarlas en cada nueva partida
 //solucionar problema: cuando se quita el micro, aparecen 2 coches a la vez (el realentizado + el nuevo normal). Arreglarlo para que, por ejemplo, el realentizado se vuelva rapido a mitad de la calzada por ejemplo, eso seria ideal.

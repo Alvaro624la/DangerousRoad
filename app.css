@@ -818,7 +818,7 @@ body {
   .main__article::before {
     content: "";
     z-index: 1999999996;
-    width: 100%;
+    width: 100.1%;
     height: 100vh;
     background-color: rgb(0, 0, 0);
     position: absolute;

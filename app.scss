@@ -918,7 +918,7 @@ body{
         &::before{
             content: '';
             z-index: 1999999996; //porque es ::before, necesito sumarle 1 para ser igual a ::after
-            width: 100%;
+            width: 100.1%;
             height: 100vh;
             background-color: rgb(0, 0, 0);
             position: absolute;
