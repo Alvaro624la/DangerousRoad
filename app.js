@@ -7,9 +7,9 @@ const GAME = {
     highscore: localStorage.getItem('highscore')
 };
 
-
+try{
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+// var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 //definir una instancia de reconocimiento de voz
 const recognition = new SpeechRecognition();
@@ -24,6 +24,7 @@ recognition.maxAlternatives = 1;
 
 //para registrar/grabar la voz
 let micImgContainer = document.getElementById('micImgContainer');
+micImgContainer.style.display = 'block';
 let micImg = document.getElementById('micImg');
 micImg.className = 'micOff';
 
@@ -44,6 +45,10 @@ recognition.onerror = function(event) {
     micImg.className = 'micOff';
     acelerar();
 };
+}catch{
+    micImgContainer.style.display = 'none';
+    console.log('SpeechRecognition error. Not working.');
+}
 
 /// VARIABLES ///
 let btnMute = document.getElementById('btnMute');
@@ -546,6 +551,7 @@ function winPoint(){
     //PROBLEMA CON ASINCRONIA DEL INTERVALO PARA CAMBIAR VARIABLE Y QUE AFECTE
 };
 
+try{
 /// MOVER PERSONA - AUDIO ///
 let i = 0;
 recognition.onresult = (e)=>{
@@ -577,6 +583,7 @@ recognition.onresult = (e)=>{
         tooltip.style.display = 'none';
     }, 1000);
 };
+}catch{console.log('Recognition error. Can not move with voice,')}
 
 //eliminar comportamiento click raton en la pagina
 document.onmousedown = ()=>{return false};
