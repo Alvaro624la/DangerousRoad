@@ -4,7 +4,7 @@ const GAME = {
     vehicleColor: 'Default', //misma palabra que ...Default....png las imagenes. Importante.
     homeMusic: 'mute',
     points: 0,
-    highscore: localStorage.getItem('highscore')
+    highscore: localStorage.getItem('highscore') ? localStorage.getItem('highscore') : console.log("can't save highscore")
 };
 
 try{
@@ -45,7 +45,7 @@ recognition.onerror = function(event) {
     micImg.className = 'micOff';
     acelerar();
 };
-}catch{
+}catch(err){
     micImgContainer.style.display = 'none';
     console.log('SpeechRecognition error. Not working.');
 }
@@ -82,8 +82,7 @@ let scoreboard = document.getElementById('scoreboard');
 let highscoreboard = document.getElementById('highscoreboard');
 //al cargar la pagina
 scoreboard.innerHTML = `Score: ${GAME.points}`;
-if(GAME.highscore !== null) highscoreboard.innerHTML = `Highscore: ${GAME.highscore}`
-else highscoreboard.innerHTML = `Highscore: 0`;
+GAME.highscore ? highscoreboard.innerHTML = `Highscore: ${GAME.highscore}` : highscoreboard.innerHTML = `Highscore: 0`;
 
 
 
@@ -156,7 +155,7 @@ document.body.appendChild(audioAmbient);
 audioAmbient.setAttribute('loop', '');
 
 ///CAR///
-let zIndexNum = 1999999993;
+let zIndexNum = 3;
 //velocidad en segundos de aparicion de coches
 let vehicleVelocitySec = 2; 
 let vehicleVelocityMSec = vehicleVelocitySec*1000;
@@ -361,8 +360,12 @@ function vehicleLeftAppears(){
             });
             clearInterval(randomAppearsInterval);
             //guardar highscore
-            localStorage.setItem('highscore', GAME.points);
-            GAME.highscore = localStorage.getItem('highscore');
+            try{
+                if(GAME.points > GAME.highscore){
+                    localStorage.setItem('highscore', GAME.points);
+                    GAME.highscore = localStorage.getItem('highscore');
+                }
+            } catch(err){ console.warn(err) }
             highscoreboard.innerHTML = `Highscore: ${GAME.highscore}`;
             // mostrar resultado
             GAME.points--;
@@ -457,8 +460,12 @@ function vehicleRightAppears(){
             });
             clearInterval(randomAppearsInterval);
             //guardar highscore
-            localStorage.setItem('highscore', GAME.points);
-            GAME.highscore = localStorage.getItem('highscore');
+            try{
+                if(GAME.points > GAME.highscore){
+                    localStorage.setItem('highscore', GAME.points);
+                    GAME.highscore = localStorage.getItem('highscore');
+                }
+            } catch(err){ console.warn(err) }
             highscoreboard.innerHTML = `Highscore: ${GAME.highscore}`;
             // mostrar resultado
             GAME.points--;
@@ -498,7 +505,7 @@ function vehicleRightAppears(){
             try{
                 vehicle.parentElement.removeChild(vehicle);
             }
-            catch (err) {console.log(err)};
+            catch(err){ console.warn(err) }
         }, vehicleVelocityMSec);
 };
 ///CARS APPEARS
@@ -583,7 +590,7 @@ recognition.onresult = (e)=>{
         tooltip.style.display = 'none';
     }, 1000);
 };
-}catch{console.log('Recognition error. Can not move with voice,')}
+}catch(err){console.log(`Recognition error. Can not move with voice --> ${err}`)}
 
 //eliminar comportamiento click raton en la pagina
 document.onmousedown = ()=>{return false};
@@ -721,4 +728,3 @@ btnCredits.addEventListener('mouseup', ()=>{
 
 //mandarle link al artista del fondo loop
 //https://www.youtube.com/user/ssuperguz
-
